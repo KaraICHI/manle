@@ -8,6 +8,7 @@ import android.telecom.Call;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class HomeFragment extends BaseFragment {
     private ImageView ib_top;
     private HomeRecycleAdapter adapter;
     private TextView tv_search_home;
-    private TextView tv_message_home;
+    private ImageButton tv_message_home;
 
     @Override
     public View initView() {
@@ -43,7 +44,7 @@ public class HomeFragment extends BaseFragment {
         rvHome = (RecyclerView) view.findViewById(R.id.rv_home);
         ib_top = (ImageView) view.findViewById(R.id.ib_top);
         tv_search_home = (TextView) view.findViewById(R.id.tv_search_home);
-        tv_message_home = (TextView) view.findViewById(R.id.tv_message_home);
+        tv_message_home = (ImageButton) view.findViewById(R.id.tv_message_home);
 
         return view;
     }

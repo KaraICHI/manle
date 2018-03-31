@@ -1,5 +1,6 @@
 package com.manle.saitamall.app;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -57,6 +58,7 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        changeImageSize();
         initFragment();
         initListener();
     }
@@ -69,6 +71,24 @@ public class MainActivity extends FragmentActivity {
         fragments.add(new CommunityFragment());
         fragments.add(new ShoppingCartFragment());
         fragments.add(new UserFragment());
+    }
+    private void changeImageSize() {
+        //定义底部标签图片大小
+        Drawable drawableHome = getResources().getDrawable(R.drawable.home_button_selector);
+        drawableHome.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        rbHome.setCompoundDrawables(null, drawableHome, null, null);//只放上面
+        Drawable drawableType = getResources().getDrawable(R.drawable.type_button_selector);
+        drawableType.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        rbType.setCompoundDrawables(null, drawableType, null, null);//只放上面
+        Drawable drawableCommunity = getResources().getDrawable(R.drawable.community_button_selector);
+        drawableCommunity.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        rbCommunity.setCompoundDrawables(null, drawableCommunity, null, null);//只放上面
+        Drawable drawableCart = getResources().getDrawable(R.drawable.cart_button_selector);
+        drawableCart.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        rbCart.setCompoundDrawables(null, drawableCart, null, null);//只放上面
+        Drawable drawableMe = getResources().getDrawable(R.drawable.user_button_selector);
+        drawableMe.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        rbUser.setCompoundDrawables(null, drawableMe, null, null);//只放上面
     }
 
     private void initListener() {

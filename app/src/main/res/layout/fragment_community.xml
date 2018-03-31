@@ -16,7 +16,7 @@
             android:layout_width="40dp"
             android:scaleType="fitXY"
             android:layout_height="40dp"
-            android:background="@drawable/top_btn" />
+            android:background="@drawable/top_bread" />
 
         <TextView
             android:textSize="18sp"
@@ -29,8 +29,8 @@
 
         <ImageButton
             android:id="@+id/ib_community_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="@drawable/community_message_icon" />
     </LinearLayout>
     <View
