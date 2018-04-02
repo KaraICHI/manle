@@ -4,12 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".type.fragment.TypeFragment">
+    tools:context=".type.fragment.TypeFragment"
+    android:paddingTop="23dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:padding="5dp">
+        android:padding="5dp"
+        >
 
         <com.flyco.tablayout.SegmentTabLayout
             android:id="@+id/tl_1"

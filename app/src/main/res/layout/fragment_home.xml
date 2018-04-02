@@ -6,13 +6,20 @@
 
     <include
         android:id="@+id/titlebar"
-        layout="@layout/titlebar" />
-
+        layout="@layout/titlebar"
+        />
+    <View
+        android:id="@+id/cutline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ac3f3f"
+        android:layout_below="@id/titlebar"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/titlebar" />
+        android:layout_below="@id/cutline" />
 
     <ImageButton
         android:id="@+id/ib_top"

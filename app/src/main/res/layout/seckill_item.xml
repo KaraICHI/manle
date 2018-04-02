@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="380dp"
-    android:layout_height="180dp"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
     android:background="#fff"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:paddingTop="10dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -45,6 +48,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_seckill"
+        android:padding="10dp"
+        android:background="#e00"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -16,7 +16,7 @@
             android:id="@+id/iv_goodinfo_photo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/new_img_loading_1" />
+            android:src="@drawable/new_img_loading_2" />
 
         <LinearLayout
             android:layout_width="match_parent"

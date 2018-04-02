@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:background="@drawable/community_user_name_bg"
             android:gravity="center"
             android:text="面对疾风吧"
             android:textColor="#404040" />
@@ -41,7 +40,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="260dp">
 
             <!-- put a VideoView/SurfaceView here if you want show Danmaku on top of video-->
             <ImageView
@@ -75,42 +74,38 @@
             android:layout_marginTop="20dp"
             android:background="#e1e1e1" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            >
 
             <TextView
                 android:id="@+id/tv_community_likes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/community_like_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_toLeftOf="@id/tv_community_comments"
+                android:drawableLeft="@drawable/community_like_selector"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
                 android:text="1" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/community_mid_line" />
+
+            <!--        <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/community_mid_line" />-->
 
             <TextView
                 android:id="@+id/tv_community_comments"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="70dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/community_comment_icon"
+                android:drawableLeft="@drawable/community_message_icon"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="50dp"
                 android:text="1" />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <ImageButton
@@ -119,6 +114,6 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="17dp"
-        android:background="@drawable/new_user_icon" />
+        android:background="@drawable/new_user_icon_1" />
 
 </RelativeLayout>

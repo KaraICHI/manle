@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -53,7 +54,8 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         //去掉Activity上面的状态栏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+   //    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         setContentView(R.layout.activity_main);
 

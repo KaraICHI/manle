@@ -3,6 +3,7 @@ package com.manle.saitamall.community.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class HotPostListViewAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        changeImageSize(holder.tvHotLikes,holder.tvHotComments);
         HotPostBean.ResultBean resultBean = result.get(position);
         holder.tvHotUsername.setText(resultBean.getUsername());
 
@@ -155,5 +156,17 @@ public class HotPostListViewAdapter extends BaseAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+
     }
+    private void changeImageSize(TextView tvHotLikes,TextView tvHotComments) {
+        //定义底部标签图片大小
+        Drawable drawableLike = mContext.getDrawable(R.drawable.community_like_selector);
+        drawableLike.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        tvHotLikes.setCompoundDrawables(drawableLike, null, null, null);//只放上面
+        Drawable drawableComment = mContext.getDrawable(R.drawable.community_message_icon);
+        drawableComment.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        tvHotComments.setCompoundDrawables(null, drawableComment, null, null);//只放上面
+
+    }
+
 }

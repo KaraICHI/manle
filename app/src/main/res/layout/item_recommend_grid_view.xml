@@ -19,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:lines="2"
-        android:text="全款预售【喵鹿酱】樱桃蜜语 毛呢绣花 小高腰半裙"
+        android:text="春如四季奇异果干*265g 约6袋"
         android:textColor="#000" />
 
     <TextView

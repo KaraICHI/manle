@@ -178,7 +178,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         if (product_id != null) {
             //http://192.168.51.104:8080/atguigu/json/GOODSINFO_URL.json2691
 //            wbGoodInfoMore.loadUrl(Constants.GOODSINFO_URL + product_id);
-            wbGoodInfoMore.loadUrl("http://www.atguigu.com");
+            wbGoodInfoMore.loadUrl("http://www.lingshi.com/");
             //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
             wbGoodInfoMore.setWebViewClient(new WebViewClient() {
                 @Override
@@ -212,7 +212,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         if (cover_price != null) {
             tvGoodInfoPrice.setText("￥" + cover_price);
         }
-        setWebView(product_id);
+      //  setWebView(product_id);
     }
 
 

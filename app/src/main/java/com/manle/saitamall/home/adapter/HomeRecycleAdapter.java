@@ -2,10 +2,12 @@ package com.manle.saitamall.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,20 +66,20 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     /**
      * 活动
      */
-    public static final int ACT = 2;
+ //   public static final int ACT = 1;
 
     /**
      * 秒杀
      */
-    public static final int SECKILL = 3;
+    public static final int SECKILL = 2;
     /**
      * 推荐
      */
-    public static final int RECOMMEND = 4;
+    public static final int RECOMMEND = 3;
     /**
      * 热卖
      */
-    public static final int HOT = 5;
+    public static final int HOT = 4;
 
     /**
      * 当前类型
@@ -107,9 +109,9 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case CHANNEL:
                 currentType = CHANNEL;
                 break;
-            case ACT:
+         /*   case ACT:
                 currentType = ACT;
-                break;
+                break;*/
             case SECKILL:
                 currentType = SECKILL;
                 break;
@@ -138,9 +140,9 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             return new BannerViewHolder(mLayoutInflater.inflate(R.layout.banner_viewpager, null), mContext, resultBean);
         } else if (viewType == CHANNEL) {
             return new ChannelViewHolder(mLayoutInflater.inflate(R.layout.channel_item, null), mContext);
-        } else if (viewType == ACT) {
+        }/* else if (viewType == ACT) {
             return new ActViewHolder(mLayoutInflater.inflate(R.layout.act_item, null), mContext);
-        } else if (viewType == SECKILL) {
+        } */else if (viewType == SECKILL) {
             return new SeckillViewHolder(mLayoutInflater.inflate(R.layout.seckill_item, null), mContext);
         } else if (viewType == RECOMMEND) {
             return new RecommendViewHolder(mLayoutInflater.inflate(R.layout.recommend_item, null), mContext);
@@ -163,10 +165,10 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         } else if (getItemViewType(position) == CHANNEL) {
             ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
             channelViewHolder.setData(resultBean.getChannel_info());
-        } else if (getItemViewType(position) == ACT) {
+        }/* else if (getItemViewType(position) == ACT) {
             ActViewHolder actViewHolder = (ActViewHolder) holder;
             actViewHolder.setData(resultBean.getAct_info());
-        } else if (getItemViewType(position) == SECKILL) {
+        } */else if (getItemViewType(position) == SECKILL) {
             SeckillViewHolder seckillViewHolder = (SeckillViewHolder) holder;
             seckillViewHolder.setData(resultBean.getSeckill_info());
         } else if (getItemViewType(position) == RECOMMEND) {
@@ -279,6 +281,13 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             tvTime = (TextView) itemView.findViewById(R.id.tv_time_seckill);
             tvMore = (TextView) itemView.findViewById(R.id.tv_more_seckill);
             recyclerView = (RecyclerView) itemView.findViewById(R.id.rv_seckill);
+            recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                @Override
+                public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                    super.getItemOffsets(outRect, view, parent, state);
+                    outRect.right=20;
+                }
+            });
             this.mContext = mContext;
         }
 
@@ -335,35 +344,9 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             actViewPager.setPageMargin(20);
             actViewPager.setOffscreenPageLimit(3);
             actViewPager.setPageTransformer(true, new AlphaPageTransformer(new ScaleInTransformer()));
+            actViewPager.setAdapter(new ActAdapter(mContext,resultBean.getAct_info()));
 
-            actViewPager.setAdapter(new PagerAdapter() {
-                @Override
-                public int getCount() {
-                    return data.size();
-                }
 
-                @Override
-                public boolean isViewFromObject(View view, Object object) {
-                    return view == object;
-                }
-
-                @Override
-                public Object instantiateItem(ViewGroup container, int position) {
-                    ImageView view = new ImageView(mContext);
-                    view.setScaleType(ImageView.ScaleType.FIT_XY);
-                    //绑定数据
-                    Glide.with(mContext)
-                            .load(Constants.BASE_URl_IMAGE + data.get(position).getIcon_url())
-                            .into(view);
-                    container.addView(view);
-                    return view;
-                }
-
-                @Override
-                public void destroyItem(ViewGroup container, int position, Object object) {
-                    container.removeView((View) object);
-                }
-            });
 
             //点击事件
             actViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -402,7 +385,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             gvChannel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (position <= 8) {
+                    if (position <= 4) {
                         Intent intent = new Intent(mContext, GoodsListActivity.class);
                         intent.putExtra("position", position);
                         mContext.startActivity(intent);

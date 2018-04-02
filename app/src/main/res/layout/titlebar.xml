@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ed3f3f"
+    android:fitsSystemWindows="true"
     android:orientation="horizontal">
     <ImageView
         android:layout_width="90dp"
@@ -39,12 +40,5 @@
         android:background="@drawable/new_message_icon_1"
         android:layout_gravity="center_vertical"
         />
-<!--
-    <TextView
-        android:id="@+id/tv_message_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/new_message_icon"
-        android:textColor="#fff" />-->
+
 </LinearLayout>
