@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:orientation="vertical"
+    android:paddingTop="23dp"
     android:visibility="visible">
 
     <LinearLayout
@@ -15,7 +16,7 @@
 
         <Button
             android:id="@+id/btn_drawer_type_cancel"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:background="@color/transparent"
@@ -23,7 +24,6 @@
             android:gravity="center"
             android:text="取消"
             android:textColor="#4e4444"
-            android:textSize="15sp"
             android:visibility="visible" />
 
         <TextView
@@ -37,11 +37,11 @@
             android:padding="5dp"
             android:text="类别"
             android:textColor="#4e4444"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_drawer_type_confirm"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:background="@color/transparent"
@@ -49,7 +49,6 @@
             android:gravity="center"
             android:text="确定"
             android:textColor="#4e4444"
-            android:textSize="15sp"
             android:visibility="visible" />
     </LinearLayout>
 

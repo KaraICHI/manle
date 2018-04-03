@@ -70,7 +70,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void setData(TypeListBean.ResultBean.PageDataBean data) {
             Glide.with(mContext).load(Constants.BASE_URl_IMAGE +data.getFigure()).into(iv_hot);
             tv_name.setText(data.getName());
-            tv_price.setText("￥" + data.getCover_price());
+            tv_price.setText(data.getCover_price());
             this.data = data;
 
         }

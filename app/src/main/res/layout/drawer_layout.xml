@@ -6,6 +6,7 @@
     android:background="#eeee"
     android:orientation="vertical"
     android:clickable="true"
+    android:paddingTop="23dp"
     android:visibility="visible">
 
     <include layout="@layout/drawer_layout_title" />

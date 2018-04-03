@@ -32,7 +32,7 @@
             android:id="@+id/ib_community_message"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/community_message_icon" />
+            android:background="@drawable/community_edit_icon" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +48,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
     private TextView tvGoodInfoStyle;
     private WebView wbGoodInfoMore;
     private TextView tvGoodInfoCallcenter;
-    private TextView tvGoodInfoCollection;
+    private RadioButton rbGoodInfoCollection;
     private TextView tvGoodInfoCart;
     private Button btnGoodInfoAddcart;
     private TextView tvMoreShare;
@@ -76,14 +78,14 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         ibGoodInfoMore = (ImageButton) findViewById(R.id.ib_good_info_more);
         ivGoodInfoImage = (ImageView) findViewById(R.id.iv_good_info_image);
         tvGoodInfoName = (TextView) findViewById(R.id.tv_good_info_name);
-        tvGoodInfoDesc = (TextView) findViewById(R.id.tv_good_info_desc);
+      //  tvGoodInfoDesc = (TextView) findViewById(R.id.tv_good_info_desc);
         tvGoodInfoPrice = (TextView) findViewById(R.id.tv_good_info_price);
         tvGoodInfoStore = (TextView) findViewById(R.id.tv_good_info_store);
         tvGoodInfoStyle = (TextView) findViewById(R.id.tv_good_info_style);
         wbGoodInfoMore = (WebView) findViewById(R.id.wb_good_info_more);
 
         tvGoodInfoCallcenter = (TextView) findViewById(R.id.tv_good_info_callcenter);
-        tvGoodInfoCollection = (TextView) findViewById(R.id.tv_good_info_collection);
+        rbGoodInfoCollection = (RadioButton) findViewById(R.id.tv_good_info_collection);
         tvGoodInfoCart = (TextView) findViewById(R.id.tv_good_info_cart);
         btnGoodInfoAddcart = (Button) findViewById(R.id.btn_good_info_addcart);
 
@@ -93,6 +95,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         tvMoreHome = (TextView) findViewById(R.id.tv_more_home);
 
         btn_more = (Button) findViewById(R.id.btn_more);
+        changeImageSize();
 
         ibGoodInfoBack.setOnClickListener(this);
         ibGoodInfoMore.setOnClickListener(this);
@@ -105,7 +108,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         btn_more.setOnClickListener(this);
 
         tvGoodInfoCallcenter.setOnClickListener(this);
-        tvGoodInfoCollection.setOnClickListener(this);
+        rbGoodInfoCollection.setOnClickListener(this);
         tvGoodInfoCart.setOnClickListener(this);
         btnGoodInfoAddcart.setOnClickListener(this);
         tvGoodInfoCallcenter.setOnClickListener(this);
@@ -131,7 +134,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
             ll_root.setVisibility(View.GONE);
         } else if (v == tvMoreShare) {
             Toast.makeText(GoodsInfoActivity.this, "分享", Toast.LENGTH_SHORT).show();
-//            showShare();
+       //   showShare();
         } else if (v == tvMoreSearch) {
             Toast.makeText(GoodsInfoActivity.this, "搜索", Toast.LENGTH_SHORT).show();
         } else if (v == tvMoreHome) {
@@ -141,7 +144,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
             Toast.makeText(GoodsInfoActivity.this, "客服", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, CallCenterActivity.class);
             startActivity(intent);
-        } else if (v == tvGoodInfoCollection) {
+        } else if (v == rbGoodInfoCollection) {
             Toast.makeText(GoodsInfoActivity.this, "收藏", Toast.LENGTH_SHORT).show();
         } else if (v == tvGoodInfoCart) {
 //            Toast.makeText(GoodsInfoActivity.this, "购物车", Toast.LENGTH_SHORT).show();
@@ -210,7 +213,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
             tvGoodInfoName.setText(name);
         }
         if (cover_price != null) {
-            tvGoodInfoPrice.setText("￥" + cover_price);
+            tvGoodInfoPrice.setText(cover_price);
         }
       //  setWebView(product_id);
     }
@@ -303,6 +306,25 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         // 5 在底部显示
         window.showAtLocation(GoodsInfoActivity.this.findViewById(R.id.ll_goods_root),
                 Gravity.BOTTOM, 0, VirtualkeyboardHeight.getBottomStatusHeight(GoodsInfoActivity.this));
+
+    }
+
+
+    private void changeImageSize() {
+        //定义底部标签图片大小
+        Drawable drawableHome = getResources().getDrawable(R.drawable.main_user_1);
+        drawableHome.setBounds(0, 0, 59, 59);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        tvGoodInfoCallcenter.setCompoundDrawables(null, drawableHome, null, null);//只放上面
+        Drawable drawableType = getResources().getDrawable(R.drawable.favorite_selector);
+        drawableType.setBounds(0, 0, 59, 59);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        rbGoodInfoCollection.setCompoundDrawables(null, drawableType, null, null);//只放上面
+        Drawable drawableCommunity = getResources().getDrawable(R.drawable.main_cart_1);
+        drawableCommunity.setBounds(0, 0, 59, 59);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        tvGoodInfoCart.setCompoundDrawables(null, drawableCommunity, null, null);//只放上面
+        Drawable drawableSearch = getResources().getDrawable(R.drawable.icon_search_white);
+        drawableSearch.setBounds(0, 0, 89, 89);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+        tvMoreSearch.setCompoundDrawables(null, drawableSearch, null, null);//只放上面
+
 
     }
 }

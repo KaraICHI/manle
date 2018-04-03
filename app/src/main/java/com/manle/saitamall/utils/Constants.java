@@ -29,7 +29,8 @@ public class Constants {
     //主页Fragment路径
     public static final String HOME_URL = BASE_URL_JSON + "HOME_URL.json";
     //分类Fragment里面的标签Fragment页面数据
-    public static final String TAG_URL = BASE_URL_JSON + "TAG_URL.json";
+    public static final String Theme_URL = BASE_URL_JSON + "THEME_URL.json";
+    public static final String Category_URL = BASE_URL_JSON + "CATEGORY_URL.json";
 
     public static final String NEW_POST_URL = BASE_URL_JSON + "NEW_POST_URL.json";
     public static final String HOT_POST_URL = BASE_URL_JSON + "HOT_POST_URL.json";

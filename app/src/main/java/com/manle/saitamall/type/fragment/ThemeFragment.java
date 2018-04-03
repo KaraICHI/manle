@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.manle.saitamall.R;
 import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.type.adapter.TagGridViewAdapter;
-import com.manle.saitamall.type.bean.TagBean;
+import com.manle.saitamall.type.bean.ThemeBean;
 import com.manle.saitamall.utils.Constants;
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -20,14 +20,12 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Request;
 
-/**
- * 标签页面
- */
-public class TagFragment extends BaseFragment {
+// 分类页面
+public class ThemeFragment extends BaseFragment {
 
     private GridView gv_tag;
     private TagGridViewAdapter adapter;
-    private List<TagBean.ResultBean> result;
+    private List<ThemeBean.ResultBean> result;
 
     @Override
     public View initView() {
@@ -45,10 +43,10 @@ public class TagFragment extends BaseFragment {
     public void getDataFromNet() {
         OkHttpUtils
                 .get()
-                .url(Constants.TAG_URL)
+                .url(Constants.Theme_URL)
                 .id(100)
                 .build()
-                .execute(new MyStringCallback());
+                .execute(new ThemeFragment.MyStringCallback());
     }
 
     public class MyStringCallback extends StringCallback {
@@ -89,7 +87,7 @@ public class TagFragment extends BaseFragment {
 
     private void processData(String json) {
         Gson gson = new Gson();
-        TagBean tagBean = gson.fromJson(json, TagBean.class);
-        result = tagBean.getResult();
+        ThemeBean themeBean = gson.fromJson(json, ThemeBean.class);
+        result = themeBean.getResult();
     }
 }

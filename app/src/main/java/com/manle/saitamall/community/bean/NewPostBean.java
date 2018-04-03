@@ -2,9 +2,7 @@ package com.manle.saitamall.community.bean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/10/6.
- */
+
 public class NewPostBean {
 
 

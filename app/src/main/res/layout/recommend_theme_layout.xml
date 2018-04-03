@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="#eeee"
     android:orientation="vertical"
+    android:paddingTop="23dp"
     android:clickable="true"
     android:visibility="visible">
 
@@ -16,7 +17,7 @@
 
         <Button
             android:id="@+id/btn_drawer_theme_cancel"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:background="@color/transparent"
@@ -24,7 +25,6 @@
             android:gravity="center"
             android:text="取消"
             android:textColor="#4e4444"
-            android:textSize="15sp"
             android:visibility="visible" />
 
         <TextView
@@ -38,11 +38,11 @@
             android:padding="5dp"
             android:text="推荐主题"
             android:textColor="#4e4444"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_drawer_theme_confirm"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="5dp"
             android:background="@color/transparent"
@@ -50,7 +50,6 @@
             android:gravity="center"
             android:text="确定"
             android:textColor="#4e4444"
-            android:textSize="15sp"
             android:visibility="visible" />
     </LinearLayout>
 
@@ -98,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="盗墓笔记"
+            android:text="汽水风暴"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -126,7 +125,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="FUNKO"
+            android:text="就是要水果的"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -182,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="古风原创"
+            android:text="甜蜜少女"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -210,7 +209,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="剑侠情愿叁"
+            android:text="刺激味蕾"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -238,7 +237,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="零食谷"
+            android:text="地方特色"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -266,7 +265,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="秦时明月"
+            android:text="无肉不欢"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -294,7 +293,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="全职高手"
+            android:text="HelloKitty"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 
@@ -322,7 +321,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:text="长草颜文字"
+            android:text="回忆杀"
             android:textColor="#4e4444"
             android:textSize="15sp" />
 

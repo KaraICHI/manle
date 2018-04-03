@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="23dp"
     >
 
     <RelativeLayout
@@ -13,8 +14,8 @@
 
         <ImageButton
             android:id="@+id/ib_login_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@drawable/top_bar_left_back" />
 
         <TextView
@@ -53,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16/06/05" />
+            android:text="18/06/05" />
     </LinearLayout>
 
     <View
@@ -83,7 +84,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16/06/05" />
+            android:text="18/06/05" />
     </LinearLayout>
 
     <View
@@ -113,7 +114,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16/06/05" />
+            android:text="18/06/05" />
     </LinearLayout>
 
     <View
@@ -173,7 +174,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16/06/05" />
+            android:text="18/06/05" />
     </LinearLayout>
 
     <View

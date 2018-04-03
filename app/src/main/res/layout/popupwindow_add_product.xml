@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp">
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp"
+        >
 
         <ImageView
             android:id="@+id/iv_goodinfo_photo"
@@ -29,55 +30,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="zhonghua中华风-山海经 凤凰图 jsk 类别：山海经 凤凰图 JSK"
-                android:textSize="15sp" />
+                android:text="鸡蛋布丁"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_goodinfo_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="￥300"
+                android:text="300"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="款式"
-        android:textSize="15sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="M" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="L" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="XL"
-            android:textColor="@android:color/holo_red_light" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        >
 
         <TextView
             android:layout_width="wrap_content"

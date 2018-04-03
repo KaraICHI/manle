@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -17,7 +16,7 @@ import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.community.fragment.CommunityFragment;
 import com.manle.saitamall.home.fragment.HomeFragment;
 import com.manle.saitamall.shoppingcart.fragment.ShoppingCartFragment;
-import com.manle.saitamall.type.fragment.TypeFragment;
+import com.manle.saitamall.type.fragment.ThemeFragment;
 import com.manle.saitamall.user.fragment.UserFragment;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class MainActivity extends FragmentActivity {
     RadioGroup rgMain;
     private ArrayList<BaseFragment> fragments;
     private int position;
-    private TypeFragment typeFragment;
+    private ThemeFragment themeFragment;
     private BaseFragment mContext;
 
     @Override
@@ -67,9 +66,9 @@ public class MainActivity extends FragmentActivity {
 
     private void initFragment() {
         fragments = new ArrayList<>();
-        typeFragment = new TypeFragment();
+        themeFragment = new ThemeFragment();
         fragments.add(new HomeFragment());
-        fragments.add(typeFragment);
+        fragments.add(themeFragment);
         fragments.add(new CommunityFragment());
         fragments.add(new ShoppingCartFragment());
         fragments.add(new UserFragment());

@@ -67,7 +67,7 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
     private LinearLayout ll_theme_root;
     private LinearLayout ll_type_root;
 
-    private ImageButton ib_drawer_layout_back;
+    private Button ib_drawer_layout_back;
     private Button btn_drawer_layout_confirm;
     private Button btn_drawer_layout_cancel;
 
@@ -115,7 +115,7 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
         ll_theme_root = (LinearLayout) findViewById(R.id.ll_theme_root);
         ll_type_root = (LinearLayout) findViewById(R.id.ll_type_root);
 
-        ib_drawer_layout_back = (ImageButton) findViewById(R.id.ib_drawer_layout_back);
+        ib_drawer_layout_back = (Button) findViewById(R.id.ib_drawer_layout_back);
         btn_drawer_layout_confirm = (Button) findViewById(R.id.btn_drawer_layout_confirm);
         btn_drawer_layout_cancel = (Button) findViewById(R.id.btn_drawer_layout_cancel);
         btn_drawer_type_confirm = (Button) findViewById(R.id.btn_drawer_type_confirm);
@@ -328,9 +328,9 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
         //去掉默认箭头
         listView.setGroupIndicator(null);
         addInfo("全部", new String[]{});
-        addInfo("上衣", new String[]{"古风", "和风", "lolita", "日常"});
-        addInfo("下装", new String[]{"日常", "泳衣", "汉风", "lolita", "创意T恤"});
-        addInfo("外套", new String[]{"汉风", "古风", "lolita", "胖次", "南瓜裤", "日常"});
+        addInfo("品牌", new String[]{"德芙", "瑞士莲", "费列罗", "多利是"});
+        addInfo("产地", new String[]{"日本", "韩国", "美国", "中国", "意大利"});
+
 
         // 这里是控制如果列表没有孩子菜单不展开的效果
         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
