@@ -15,22 +15,7 @@ public class HotPostBean {
 
     private int code;
     private String msg;
-    /**
-     * post_id : 2313
-     * user_id : 90437
-     * figure : http://img01.cycangcdn.com/ugc/post/img/201609/14746252609717297.png
-     * saying : 惊喜不断，新爆款、爆款、爆款，限时预定哦！
-     * add_time : 1474625262
-     * likes : 13
-     * comments : 6
-     * is_hot : 1
-     * is_top : 1
-     * is_essence : 1
-     * username : 尚硅谷首席惊喜官
-     * avatar : http://img01.cycangcdn.com/ugc/user/avatar/14651924470798522.png
-     * is_like : 0
-     * comment_list : ["啦啦","啦啦","吃土快乐，祝我快乐","猝不及防一口土\u2026\u2026","吃土愉快","啊啊啊啊啊啊啊疯掉了！！！！！猝不及防啊啊啊"]
-     */
+
 
     private List<ResultBean> result;
 

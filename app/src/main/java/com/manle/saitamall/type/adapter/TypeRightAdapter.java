@@ -29,7 +29,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     /**
      * 常用分类
      */
-    private List<TypeBean.ResultBean.ChildBean> child;
+  //  private List<TypeBean.ResultBean.ChildBean> child;
     /**
      * 热卖商品列表的数据
      */
@@ -58,7 +58,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         mLayoutInflater = LayoutInflater.from(mContext);
 
         if (result != null && result.size() > 0) {
-            child = result.get(0).getChild();
+      //      child = result.get(0).getChild();
             hot_product_list = result.get(0).getHot_product_list();
         }
     }
@@ -66,43 +66,44 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        if (viewType == HOT) {
+      //  if (viewType == HOT) {
             return new HotViewHolder(mLayoutInflater.inflate(R.layout.item_hot_right, null), mContext);
-        } else {
+       /* } else {
             return new OrdinaryViewHolder(mLayoutInflater.inflate(R.layout.item_ordinary_right, null), mContext);
-        }
+        }*/
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        if (getItemViewType(position) == HOT) {
+    //    if (getItemViewType(position) == HOT) {
             HotViewHolder hotViewHolder = (HotViewHolder) holder;
             hotViewHolder.setData(hot_product_list);
-        } else {
+    /*    } else {
             OrdinaryViewHolder ordinaryViewHolder = (OrdinaryViewHolder) holder;
             ordinaryViewHolder.setData(child.get(position - 1), position - 1);
-        }
+        }*/
     }
 
     @Override
     public int getItemViewType(int position) {
 
-        if (position == HOT) {
+    //    if (position == HOT) {
             currentType = HOT;
-        } else {
+     /*   } else {
             currentType = ORDINARY;
         }
-
+*/
         return currentType;
     }
 
     @Override
     public int getItemCount() {
-        return child.size() + 1;
+        //return child.size() + 1;
+        return hot_product_list.size();
     }
 
-    class OrdinaryViewHolder extends RecyclerView.ViewHolder {
+   /* class OrdinaryViewHolder extends RecyclerView.ViewHolder {
         private Context mContext;
         private ImageView iv_ordinary_right;
         private TextView tv_ordinary_right;
@@ -133,7 +134,7 @@ public class TypeRightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             });
         }
     }
-
+*/
     class HotViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout linear;
         private Context mContext;

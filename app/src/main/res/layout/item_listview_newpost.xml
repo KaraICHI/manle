@@ -77,17 +77,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingRight="20dp"
             >
 
-            <TextView
+            <RadioButton
                 android:id="@+id/tv_community_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
                 android:layout_toLeftOf="@id/tv_community_comments"
                 android:drawableLeft="@drawable/community_like_selector"
                 android:drawablePadding="10dp"
+                android:button="@null"
                 android:gravity="center_vertical"
-                android:text="1" />
+                android:text="1"
+                android:layout_marginRight="20dp"
+                />
 
 
             <!--        <ImageView
@@ -96,7 +100,7 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/community_mid_line" />-->
 
-            <TextView
+            <RadioButton
                 android:id="@+id/tv_community_comments"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
@@ -104,6 +108,7 @@
                 android:drawableLeft="@drawable/community_message_icon"
                 android:drawablePadding="10dp"
                 android:gravity="center_vertical"
+                android:button="@null"
                 android:text="1" />
         </RelativeLayout>
     </LinearLayout>

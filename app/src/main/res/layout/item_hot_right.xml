@@ -25,10 +25,10 @@
             android:orientation="horizontal" />
     </HorizontalScrollView>
 
-    <TextView
+ <!--   <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="常用分类"
-        android:textColor="#788188" />
+        android:textColor="#788188" />-->
 </LinearLayout>

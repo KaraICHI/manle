@@ -165,7 +165,7 @@ public class HotPostListViewAdapter extends BaseAdapter {
         tvHotLikes.setCompoundDrawables(drawableLike, null, null, null);//只放上面
         Drawable drawableComment = mContext.getDrawable(R.drawable.community_message_icon);
         drawableComment.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        tvHotComments.setCompoundDrawables(null, drawableComment, null, null);//只放上面
+        tvHotComments.setCompoundDrawables( drawableComment,null, null, null);//只放上面
 
     }
 

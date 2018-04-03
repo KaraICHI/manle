@@ -69,7 +69,6 @@ public class NewPostListViewAdapter extends BaseAdapter {
 
         NewPostBean.ResultBean resultBean = result.get(position);
         holder.tvCommunityUsername.setText(resultBean.getUsername());
-
         Glide.with(mContext)
                 .load(Constants.BASE_URl_IMAGE +resultBean.getFigure())
                 .into(holder.ivCommunityFigure);
@@ -146,7 +145,7 @@ public class NewPostListViewAdapter extends BaseAdapter {
         tvHotLikes.setCompoundDrawables(drawableLike, null, null, null);//只放上面
         Drawable drawableComment = mContext.getDrawable(R.drawable.community_message_icon);
         drawableComment.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        tvHotComments.setCompoundDrawables(null, drawableComment, null, null);//只放上面
+        tvHotComments.setCompoundDrawables(drawableComment,null, null, null);//只放上面
 
     }
 }
