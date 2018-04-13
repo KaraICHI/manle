@@ -11,12 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:gravity="center_vertical"
         >
 
         <ImageView
             android:layout_width="3dp"
             android:layout_height="13dp"
-            android:src="@drawable/title_shape_red" />
+            android:src="@drawable/title_shape_red"
+
+            />
 
         <TextView
             android:layout_width="wrap_content"

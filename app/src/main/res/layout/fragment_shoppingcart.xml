@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
     android:paddingTop="23dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="#fff">
+        android:layout_height="50dp"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,7 +36,7 @@
             android:textColor="#303235" />
     </RelativeLayout>
 
-<!--    <View
+    <!--    <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="#eeee" />-->
@@ -132,7 +135,7 @@
                 <Button
                     android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/words"
                     android:text="删除"
                     android:textColor="#303235"
@@ -141,7 +144,7 @@
                 <Button
                     android:id="@+id/btn_collection"
                     android:layout_width="wrap_content"
-                    android:layout_height="35dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="15dp"
                     android:background="@drawable/wordsred"
                     android:text="收藏"
@@ -151,5 +154,6 @@
         </LinearLayout>
 
         <include layout="@layout/empty_cart" />
+        <include layout="@layout/not_login"/>
     </FrameLayout>
 </LinearLayout>

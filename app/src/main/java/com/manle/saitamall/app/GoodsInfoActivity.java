@@ -29,6 +29,7 @@ import com.manle.saitamall.home.uitls.VirtualkeyboardHeight;
 import com.manle.saitamall.shoppingcart.activity.ShoppingCartActivity;
 import com.manle.saitamall.shoppingcart.utils.CartProvider;
 import com.manle.saitamall.shoppingcart.view.NumberAddSubView;
+import com.manle.saitamall.utils.CacheUtils;
 import com.manle.saitamall.utils.Constants;
 import com.bumptech.glide.Glide;
 
@@ -145,7 +146,9 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
             Intent intent = new Intent(this, CallCenterActivity.class);
             startActivity(intent);
         } else if (v == rbGoodInfoCollection) {
-            Toast.makeText(GoodsInfoActivity.this, "收藏", Toast.LENGTH_SHORT).show();
+            if (isLogin()){
+                Toast.makeText(GoodsInfoActivity.this, "收藏", Toast.LENGTH_SHORT).show();
+            }
         } else if (v == tvGoodInfoCart) {
 //            Toast.makeText(GoodsInfoActivity.this, "购物车", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, ShoppingCartActivity.class);
@@ -154,7 +157,9 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         } else if (v == btnGoodInfoAddcart) {
             //添加购物车
 //            cartProvider.addData(goods_bean);
-            showPopwindow();
+            if (isLogin()){
+                showPopwindow();
+            }
 //            Toast.makeText(GoodsInfoActivity.this, "添加购物车成功", Toast.LENGTH_SHORT).show();
         }
     }
@@ -326,5 +331,14 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         tvMoreSearch.setCompoundDrawables(null, drawableSearch, null, null);//只放上面
 
 
+    }
+    private boolean isLogin() {
+        String user = CacheUtils.getString(this,"user");
+        if (user==null||"".equals(user)){
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            return false;
+        }
+        return true;
     }
 }

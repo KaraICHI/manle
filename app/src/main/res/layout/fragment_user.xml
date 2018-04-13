@@ -30,10 +30,35 @@
 
                 <ImageButton
                     android:id="@+id/ib_user_avator"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerInParent="true"
                     android:background="@drawable/new_user_icon_1" />
+                <LinearLayout
+                    android:layout_marginBottom="-30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ib_user_avator"
+                    android:layout_centerHorizontal="true"
+                    >
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#fff"
+                        android:text="用户名"
+                        />
+                    <TextView
+                        android:id="@+id/tv_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#e44"
+                        android:text="lv1"
+                        />
+                </LinearLayout>
+
             </RelativeLayout>
 
             <View
@@ -194,6 +219,7 @@
                 android:layout_marginLeft="45dp"
                 android:background="#eee" />
             <TextView
+                android:id="@+id/tv_my_collector"
                 style="@style/TextStyle"
                 android:drawableLeft="@drawable/user_channel_icon_collect"
                 android:text="我的收藏" />
@@ -236,9 +262,10 @@
                 android:background="#eee" />
 
             <TextView
+                android:id="@+id/tv_login_out"
                 style="@style/TextStyle"
                 android:drawableLeft="@drawable/user_channel_icon_feedback"
-                android:text="服务反馈" />
+                android:text="退出登录" />
 
             <View
                 android:layout_width="match_parent"
@@ -257,5 +284,7 @@
         android:text="个人中心"
         android:textColor="#0000"
         android:textSize="20sp" />
+
+    <include layout="@layout/not_login"/>
 
 </RelativeLayout>

@@ -4,18 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
+    android:paddingTop="23dp"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="50dp"
+        android:padding="10dp"
+        >
 
         <ImageButton
             android:id="@+id/ib_login_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/top_bar_left_back" />
+            android:background="@drawable/top_bar_left_back"
+            android:layout_centerVertical="true"
+            />
 
         <TextView
             android:textColor="#464646"
@@ -33,20 +38,22 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/new_user_login_icon" />
+            android:background="@drawable/new_user_icon_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="#fff"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
+
             android:padding="10dp">
 
             <TextView
@@ -74,11 +81,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="#fff"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:padding="8dp">
 
             <TextView
@@ -122,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="点击登录，表示同意《尚硅谷用户协议》" />
+            android:text="点击登录，表示同意《manle用户协议》" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -152,8 +160,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="50dp"
             android:padding="10dp"
-            android:text="其他登录方式" />
+            android:text="————其他登录方式————" />
 
         <LinearLayout
             android:layout_width="match_parent"

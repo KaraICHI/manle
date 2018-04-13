@@ -19,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.annimon.stream.Collector;
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.manle.saitamall.R;
 import com.manle.saitamall.app.GoodsInfoActivity;
 import com.manle.saitamall.home.adapter.ExpandableListViewAdapter;
@@ -32,10 +35,15 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Request;
+
+import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
+
 // 商品列表页面
 public class GoodsListActivity extends Activity implements View.OnClickListener {
 
@@ -84,15 +92,18 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
     private RelativeLayout rl_theme_note;
     private int position;
     private String[] urls = new String[]{
-            Constants.CLOSE_STORE,
-            Constants.GAME_STORE,
-            Constants.COMIC_STORE,
-            Constants.COSPLAY_STORE,
-            Constants.GUFENG_STORE,
-            Constants.STICK_STORE,
-            Constants.WENJU_STORE,
-            Constants.FOOD_STORE,
-            Constants.SHOUSHI_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+            Constants.GUODONG_STORE,
+
     };
     private List<TypeListBean.ResultBean.PageDataBean> page_data;
     private GoodsListAdapter adapter1;
@@ -178,9 +189,13 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
             if (click_count % 2 == 1) {
                 // 箭头向下红
                 ivGoodsListArrow.setBackgroundResource(R.drawable.new_price_sort_desc);
+                Collections.sort(page_data, (lhs, rhs) -> (int)(Float.parseFloat(lhs.getCover_price())-Float.parseFloat(rhs.getCover_price())));
+                adapter1.notifyDataSetChanged();
             } else {
                 // 箭头向上红
                 ivGoodsListArrow.setBackgroundResource(R.drawable.new_price_sort_asc);
+                Collections.sort(page_data, (lhs, rhs) -> (int)(Float.parseFloat(rhs.getCover_price())-Float.parseFloat(lhs.getCover_price())));
+                adapter1.notifyDataSetChanged();
             }
         } else if (v == tvGoodsListSort) {
             //综合排序点击事件
@@ -363,6 +378,9 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
 
 
     public void getDataFromNet() {
+        if("theme".equals(getIntent().getStringExtra("type"))){
+            Log.e(TAG, "getDataFromNet: type--------------theme"+position);
+        }
         OkHttpUtils
                 .get()
                 .url(urls[position])

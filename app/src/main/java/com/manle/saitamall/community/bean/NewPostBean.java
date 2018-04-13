@@ -50,7 +50,7 @@ public class NewPostBean {
         private String username;
         private String avatar;
         private String is_like;
-        private List<?> comment_list;
+        private List<String> comment_list;
 
         public String getPost_id() {
             return post_id;
@@ -156,11 +156,12 @@ public class NewPostBean {
             this.is_like = is_like;
         }
 
-        public List<?> getComment_list() {
+
+        public List<String> getComment_list() {
             return comment_list;
         }
 
-        public void setComment_list(List<?> comment_list) {
+        public void setComment_list(List<String> comment_list) {
             this.comment_list = comment_list;
         }
     }

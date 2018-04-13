@@ -1,6 +1,7 @@
 package com.manle.saitamall.shoppingcart.activity;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.manle.saitamall.R;
+import com.manle.saitamall.app.LoginActivity;
 import com.manle.saitamall.app.MainActivity;
+import com.manle.saitamall.app.MyAppliction;
 import com.manle.saitamall.shoppingcart.adapter.ShopCartAdapter;
 import com.manle.saitamall.home.bean.GoodsBean;
 import com.manle.saitamall.shoppingcart.utils.CartProvider;
@@ -37,6 +40,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     private ShopCartAdapter adapter;
     private LinearLayout ll_empty_shopcart;
     private TextView tv_empty_cart_tobuy;
+    private LinearLayout ll_not_login;
+    private TextView tv_to_login;
     /**
      * 编辑状态
      */
@@ -66,6 +71,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         btn_collection = (Button) findViewById(R.id.btn_collection);
         ll_empty_shopcart = (LinearLayout) findViewById(R.id.ll_empty_shopcart);
         tv_empty_cart_tobuy = (TextView) findViewById(R.id.tv_empty_cart_tobuy);
+        ll_not_login = (LinearLayout) findViewById(R.id.ll_not_login);
+        tv_to_login = (TextView) findViewById(R.id.tv_to_login);
 
         ibShopcartBack.setOnClickListener(this);
         btnCheckOut.setOnClickListener(this);
@@ -73,6 +80,8 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         btn_delete.setOnClickListener(this);
         tv_empty_cart_tobuy.setClickable(true);
         tv_empty_cart_tobuy.setOnClickListener(this);
+        tv_to_login.setClickable(true);
+        tv_to_login.setOnClickListener(this);
     }
 
     /**
@@ -107,6 +116,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
         } else if (v == tv_empty_cart_tobuy) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+        } else if (v==tv_to_login){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivityForResult(intent,1);
         }
     }
 
@@ -142,9 +154,18 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
 
         findViews();
 
-        showData();
-        tvShopcartEdit.setTag(ACTION_EDIT);
-        tvShopcartEdit.setText("编辑");
+        if (MyAppliction.getUser()==null){
+            tvShopcartEdit.setVisibility(View.GONE);
+            ll_not_login.setVisibility(View.VISIBLE);
+            ll_check_all.setVisibility(View.GONE);
+            ll_delete.setVisibility(View.GONE);
+        }else {
+            showData();
+            tvShopcartEdit.setTag(ACTION_EDIT);
+            tvShopcartEdit.setText("编辑");
+        }
+
+
     }
 
     //-----------------------------------------
@@ -177,6 +198,13 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
             ll_empty_shopcart.setVisibility(View.VISIBLE);
             ll_check_all.setVisibility(View.GONE);
             ll_delete.setVisibility(View.GONE);
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==0){
+            onCreate(null);
         }
     }
 }

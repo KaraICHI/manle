@@ -1,24 +1,29 @@
 package com.manle.saitamall.type.fragment;
 
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.manle.saitamall.R;
 import com.manle.saitamall.base.BaseFragment;
+import com.manle.saitamall.home.activity.GoodsListActivity;
 import com.manle.saitamall.type.adapter.TagGridViewAdapter;
 import com.manle.saitamall.type.bean.ThemeBean;
 import com.manle.saitamall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Request;
+import okhttp3.Response;
 
 // 分类页面
 public class ThemeFragment extends BaseFragment {
@@ -31,6 +36,15 @@ public class ThemeFragment extends BaseFragment {
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_tag, null);
         gv_tag = (GridView) view.findViewById(R.id.gv_tag);
+        gv_tag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), GoodsListActivity.class);
+                intent.putExtra("position",position);
+                intent.putExtra("type","theme");
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

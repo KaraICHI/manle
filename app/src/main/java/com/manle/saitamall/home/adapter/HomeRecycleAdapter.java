@@ -131,7 +131,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      */
     @Override
     public int getItemCount() {
-        return 6;
+        return 5;
     }
 
     @Override

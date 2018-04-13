@@ -1,10 +1,13 @@
 package com.manle.saitamall.app;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -13,11 +16,13 @@ import android.widget.RadioGroup;
 
 import com.manle.saitamall.R;
 import com.manle.saitamall.base.BaseFragment;
+import com.manle.saitamall.bean.User;
 import com.manle.saitamall.community.fragment.CommunityFragment;
 import com.manle.saitamall.home.fragment.HomeFragment;
 import com.manle.saitamall.shoppingcart.fragment.ShoppingCartFragment;
 import com.manle.saitamall.type.fragment.ThemeFragment;
 import com.manle.saitamall.user.fragment.UserFragment;
+import com.manle.saitamall.utils.CacheUtils;
 
 import java.util.ArrayList;
 
@@ -26,6 +31,7 @@ import butterknife.ButterKnife;
 
 // 主页面
 public class MainActivity extends FragmentActivity {
+    private static final String TAG = "MainActivity";
 
     @Bind(R.id.frameLayout)
     FrameLayout frameLayout;
@@ -121,12 +127,15 @@ public class MainActivity extends FragmentActivity {
                 }
 
                 BaseFragment baseFragment = getFragment(position);
-                switchFragment(mContext, baseFragment);
+
+                    switchFragment(mContext, baseFragment);
+
             }
         });
 
         rgMain.check(R.id.rb_home);
     }
+
 
     /**
      * @param position
@@ -168,4 +177,8 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
+
+
+
+
 }

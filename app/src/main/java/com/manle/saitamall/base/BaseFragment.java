@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.manle.saitamall.bean.User;
+
 
 public abstract class BaseFragment extends Fragment {
     public Context mContext;

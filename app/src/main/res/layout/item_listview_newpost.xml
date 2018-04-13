@@ -66,21 +66,37 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="走过路过不要错过"
+            android:lines="1"
             android:textColor="#434343" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="20dp"
+            android:layout_margin="10dp"
             android:background="#e1e1e1" />
 
         <RelativeLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
             android:paddingRight="20dp"
             >
+            <EditText
+                android:id="@+id/et_send_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:lines="1"
+                android:imeOptions="actionSend"
+                android:background="@drawable/search_home_shape_gray"
+                android:textSize="15sp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/send_comment_black"
+                android:visibility="gone"
+                />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/tv_community_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
@@ -91,6 +107,7 @@
                 android:gravity="center_vertical"
                 android:text="1"
                 android:layout_marginRight="20dp"
+                android:checked="false"
                 />
 
 

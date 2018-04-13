@@ -13,7 +13,6 @@
         android:background="#f0a420"
         android:gravity="center"
         android:lines="2"
-        android:padding="10dp"
         android:text="糖果星球"
         android:textColor="#fff"
         android:textSize="18sp" />

@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="23dp"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="#fff"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        >
 
         <ImageButton
             android:id="@+id/ib_shopcart_back"
@@ -53,6 +56,7 @@
             android:background="#eeee" />
 
         <include layout="@layout/empty_cart" />
+        <include layout="@layout/not_login"/>
     </FrameLayout>
 
     <FrameLayout
@@ -135,7 +139,7 @@
             <Button
                 android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:background="@drawable/words"
                 android:text="删除"
                 android:textColor="#303235"
@@ -144,7 +148,7 @@
             <Button
                 android:id="@+id/btn_collection"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="15dp"
                 android:background="@drawable/wordsred"
                 android:text="收藏"

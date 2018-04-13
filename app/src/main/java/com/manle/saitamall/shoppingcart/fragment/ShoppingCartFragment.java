@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.manle.saitamall.R;
+import com.manle.saitamall.app.LoginActivity;
 import com.manle.saitamall.app.MainActivity;
+import com.manle.saitamall.app.MyAppliction;
 import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.home.bean.GoodsBean;
 import com.manle.saitamall.shoppingcart.adapter.ShopCartAdapter;
@@ -40,7 +42,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class ShoppingCartFragment extends BaseFragment {
+public class ShoppingCartFragment extends BaseFragment implements View.OnClickListener {
 
     private TextView tvShopcartEdit;
     private RecyclerView recyclerview;
@@ -55,6 +57,8 @@ public class ShoppingCartFragment extends BaseFragment {
     private ImageView ivEmpty;
     private TextView tvEmptyCartTobuy;
     private LinearLayout ll_empty_shopcart;
+    private LinearLayout ll_not_login;
+    private TextView tv_to_login;
 
     /**
      * 编辑状态
@@ -82,23 +86,34 @@ public class ShoppingCartFragment extends BaseFragment {
         tvEmptyCartTobuy = (TextView) view.findViewById(R.id.tv_empty_cart_tobuy);
         ll_empty_shopcart = (LinearLayout) view.findViewById(R.id.ll_empty_shopcart);
         tvEmptyCartTobuy.setClickable(true);
+        tvEmptyCartTobuy.setOnClickListener(this);
+        ll_not_login = (LinearLayout) view.findViewById(R.id.ll_not_login);
+        tv_to_login = (TextView) view.findViewById(R.id.tv_to_login);
+        tv_to_login.setClickable(true);
+        tv_to_login.setOnClickListener(this);
     }
 
     @Override
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_shoppingcart, null);
         findViews(view);
+
         return view;
     }
 
     @Override
     public void initData() {
-        initListener();
-        tvShopcartEdit.setTag(ACTION_EDIT);
-        tvShopcartEdit.setText("编辑");
-        llCheckAll.setVisibility(View.VISIBLE);
+        if (MyAppliction.getUser()==null){
+            tvShopcartEdit.setVisibility(View.GONE);
+            ll_not_login.setVisibility(View.VISIBLE);
+        }else {
+            initListener();
+            tvShopcartEdit.setTag(ACTION_EDIT);
+            tvShopcartEdit.setText("编辑");
+            llCheckAll.setVisibility(View.VISIBLE);
+            showData();
+        }
 
-        showData();
     }
 
     @Override
@@ -409,5 +424,27 @@ public class ShoppingCartFragment extends BaseFragment {
      */
     private String getSignType() {
         return "sign_type=\"RSA\"";
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_to_login:
+                Intent intent = new Intent(mContext, LoginActivity.class);
+                startActivityForResult(intent,1);
+                break;
+            case R.id.tv_empty_cart_tobuy:
+                Intent intent1 = new Intent(mContext, MainActivity.class);
+                startActivity(intent1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==0){
+            onCreate(null);
+        }
     }
 }
