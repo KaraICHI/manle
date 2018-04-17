@@ -23,6 +23,7 @@ import com.manle.saitamall.community.bean.NewPostBean;
 import com.manle.saitamall.utils.BitmapUtils;
 import com.manle.saitamall.utils.Constants;
 import com.bumptech.glide.Glide;
+import com.manle.saitamall.utils.GlideCircleTransform;
 import com.opendanmaku.DanmakuItem;
 import com.opendanmaku.DanmakuView;
 import com.opendanmaku.IDanmakuItem;
@@ -63,82 +64,66 @@ public class NewPostListViewAdapter extends BaseAdapter {
     }
 
     @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            final ViewHolder holder;
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final ViewHolder holder;
 
-            if (convertView == null) {
-                convertView = View.inflate(mContext, R.layout.item_listview_newpost, null);
-                holder = new ViewHolder(convertView);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
+        //   if (convertView == null) {
+        convertView = View.inflate(mContext, R.layout.item_listview_newpost, null);
+        holder = new ViewHolder(convertView);
+      /*      convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }*/
 
-            final NewPostBean.ResultBean resultBean = result.get(position);
-            comment_list = resultBean.getComment_list();
-            holder.tvCommunityUsername.setText(resultBean.getUsername());
-            Glide.with(mContext)
-                    .load(Constants.BASE_URl_IMAGE +resultBean.getFigure())
-                    .into(holder.ivCommunityFigure);
-            changeImageSize(holder.tvCommunityLikes,holder.tvCommunityComments,holder.etSendComments);
-            holder.tvCommunitySaying.setText(resultBean.getSaying());
-            holder.tvCommunityLikes.setText(resultBean.getLikes());
-            holder.tvCommunityComments.setText(resultBean.getComment_list().size()+"");
-            holder.tvCommunityLikes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        resultBean.setLikes(Integer.parseInt(resultBean.getLikes())+1+"");
-                        holder.tvCommunityLikes.setText(resultBean.getLikes());
-                    }else {
-                        resultBean.setLikes(Integer.parseInt(resultBean.getLikes())-1+"");
-                        holder.tvCommunityLikes.setText(resultBean.getLikes());
-                    }
-                }
-            });
-
-
-            holder.tvCommunityComments.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    holder.etSendComments.setVisibility(View.VISIBLE);
-                    holder.tvCommunityLikes.setVisibility(View.GONE);
-                    holder.tvCommunityComments.setVisibility(View.GONE);
-                }
-            });
-            holder.etSendComments.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    if (actionId== EditorInfo.IME_ACTION_UNSPECIFIED){
-                        holder.etSendComments.setVisibility(View.GONE);
-                        holder.tvCommunityLikes.setVisibility(View.VISIBLE);
-                        holder.tvCommunityComments.setVisibility(View.VISIBLE);
-                        resultBean.getComment_list().add(v.getText().toString());
-                        holder.tvCommunityComments.setText(comment_list.size()+"");
-                        holder.danmakuView.addItem(new DanmakuItem(mContext,v.getText().toString(),holder.danmakuView.getWidth()));
-                    }
-                    return false;
-                }
-            });
-
-
-
-         Picasso.with(mContext).load(resultBean.getAvatar()).transform(new Transformation() {
+        final NewPostBean.ResultBean resultBean = result.get(position);
+        comment_list = resultBean.getComment_list();
+        holder.tvCommunityUsername.setText(resultBean.getUsername());
+        Glide.with(mContext).load(Constants.BASE_URl_IMAGE + resultBean.getAvatar()).centerCrop()
+                .transform(new GlideCircleTransform(mContext)).into(holder.ibNewPostAvatar);
+        Glide.with(mContext)
+                .load(Constants.BASE_URl_IMAGE + resultBean.getFigure())
+                .into(holder.ivCommunityFigure);
+        changeImageSize(holder.tvCommunityLikes, holder.tvCommunityComments, holder.etSendComments);
+        holder.tvCommunitySaying.setText(resultBean.getSaying());
+        holder.tvCommunityLikes.setText(resultBean.getLikes());
+        holder.tvCommunityComments.setText(resultBean.getComment_list().size() + "");
+        holder.tvCommunityLikes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public Bitmap transform(Bitmap bitmap) {
-                //先对图片进行压缩
-                Bitmap zoom = BitmapUtils.zoom(bitmap, 70, 70);
-                //对请求回来的Bitmap进行圆形处理
-                Bitmap ciceBitMap = BitmapUtils.circleBitmap(zoom);
-                bitmap.recycle();//必须队更改之前的进行回收
-                return ciceBitMap;
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    resultBean.setLikes(Integer.parseInt(resultBean.getLikes()) + 1 + "");
+                    holder.tvCommunityLikes.setText(resultBean.getLikes());
+                } else {
+                    resultBean.setLikes(Integer.parseInt(resultBean.getLikes()) - 1 + "");
+                    holder.tvCommunityLikes.setText(resultBean.getLikes());
+                }
             }
+        });
 
+
+        holder.tvCommunityComments.setOnClickListener(new View.OnClickListener() {
             @Override
-            public String key() {
-                return "";
+            public void onClick(View v) {
+                holder.etSendComments.setVisibility(View.VISIBLE);
+                holder.tvCommunityLikes.setVisibility(View.GONE);
+                holder.tvCommunityComments.setVisibility(View.GONE);
             }
-        }).into(holder.ibNewPostAvatar);
+        });
+        holder.etSendComments.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                    holder.etSendComments.setVisibility(View.GONE);
+                    holder.tvCommunityLikes.setVisibility(View.VISIBLE);
+                    holder.tvCommunityComments.setVisibility(View.VISIBLE);
+                    resultBean.getComment_list().add(v.getText().toString());
+                    holder.tvCommunityComments.setText(comment_list.size() + "");
+                    holder.danmakuView.addItem(new DanmakuItem(mContext, v.getText().toString(), holder.danmakuView.getWidth()));
+                }
+                return false;
+            }
+        });
+
 
         //设置弹幕
 
@@ -153,7 +138,7 @@ public class NewPostListViewAdapter extends BaseAdapter {
             Collections.shuffle(comment_list);
             holder.danmakuView.addItem(list, true);
             holder.danmakuView.show();
-        }else{
+        } else {
             holder.danmakuView.setVisibility(View.GONE);
         }
 
@@ -187,16 +172,17 @@ public class NewPostListViewAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
-    private void changeImageSize(TextView tvHotLikes,TextView tvHotComments,EditText etSendComments) {
+
+    private void changeImageSize(TextView tvHotLikes, TextView tvHotComments, EditText etSendComments) {
         //定义底部标签图片大小
         Drawable drawableLike = mContext.getDrawable(R.drawable.community_like_selector);
         drawableLike.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
         tvHotLikes.setCompoundDrawables(drawableLike, null, null, null);//只放上面
         Drawable drawableComment = mContext.getDrawable(R.drawable.community_message_icon);
         drawableComment.setBounds(0, 0, 69, 69);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        tvHotComments.setCompoundDrawables(drawableComment,null, null, null);//只放上面
+        tvHotComments.setCompoundDrawables(drawableComment, null, null, null);//只放上面
         Drawable drawableSend = mContext.getDrawable(R.drawable.send_comment_black);
         drawableSend.setBounds(0, 0, 49, 49);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        etSendComments.setCompoundDrawables(drawableSend,null, null, null);//只放上面
+        etSendComments.setCompoundDrawables(drawableSend, null, null, null);//只放上面
     }
 }

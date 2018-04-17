@@ -1,8 +1,7 @@
 package com.manle.saitamall.bean;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/4/9.
@@ -17,6 +16,7 @@ public class User  implements Serializable{
     private String password;
     private String figure;
     private Float point;
+    private List<Product> products;
 
 
     public User(String userName, String phone, String password, String figure, Float point) {
@@ -73,5 +73,13 @@ public class User  implements Serializable{
 
     public void setPoint(Float point) {
         this.point = point;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

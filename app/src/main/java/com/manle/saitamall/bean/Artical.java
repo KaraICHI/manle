@@ -1,17 +1,18 @@
 package com.manle.saitamall.bean;
 
 
-import java.time.LocalDate;
+import org.joda.time.LocalDate;
+import org.json.JSONObject;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
  * A DTO for the Artical entity.
  */
-public class ArticalDTO implements Serializable {
+public class Artical extends JSONObject implements Serializable {
 
+    private static final long serialVersionUID = -3169085684457445182L;
     private Long id;
 
     private String title;
@@ -81,11 +82,11 @@ public class ArticalDTO implements Serializable {
             return false;
         }
 
-        ArticalDTO articalDTO = (ArticalDTO) o;
-        if(articalDTO.getId() == null || getId() == null) {
+        Artical artical = (Artical) o;
+        if(artical.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), articalDTO.getId());
+        return Objects.equals(getId(), artical.getId());
     }
 
     @Override
@@ -95,7 +96,7 @@ public class ArticalDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ArticalDTO{" +
+        return "Artical{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +

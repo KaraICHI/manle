@@ -27,11 +27,13 @@ import com.manle.saitamall.app.MainActivity;
 import com.manle.saitamall.app.MyAppliction;
 import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.home.bean.GoodsBean;
+import com.manle.saitamall.shoppingcart.activity.ShoppingCartActivity;
 import com.manle.saitamall.shoppingcart.adapter.ShopCartAdapter;
 import com.manle.saitamall.shoppingcart.pay.PayResult;
 import com.manle.saitamall.shoppingcart.pay.SignUtils;
 import com.manle.saitamall.shoppingcart.utils.CartProvider;
 import com.manle.saitamall.shoppingcart.utils.PayKeys;
+import com.manle.saitamall.utils.CacheUtils;
 import com.manle.saitamall.utils.Constants;
 
 import java.io.UnsupportedEncodingException;
@@ -103,7 +105,8 @@ public class ShoppingCartFragment extends BaseFragment implements View.OnClickLi
 
     @Override
     public void initData() {
-        if (MyAppliction.getUser()==null){
+        String user = CacheUtils.getString(mContext,"user");
+        if (user==null||user.equals("")){
             tvShopcartEdit.setVisibility(View.GONE);
             ll_not_login.setVisibility(View.VISIBLE);
         }else {
@@ -125,46 +128,32 @@ public class ShoppingCartFragment extends BaseFragment implements View.OnClickLi
 
     private void initListener() {
 
-        btnCheckOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pay(v);
+        btnCheckOut.setOnClickListener(v -> pay(v));
+
+        tvShopcartEdit.setOnClickListener(v -> {
+            //设置编辑的点击事件
+            int tag = (int) tvShopcartEdit.getTag();
+            if (tag == ACTION_EDIT) {
+                //变成完成状态
+                showDelete();
+            } else {
+                //变成编辑状态
+                hideDelete();
             }
         });
 
-        tvShopcartEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //设置编辑的点击事件
-                int tag = (int) tvShopcartEdit.getTag();
-                if (tag == ACTION_EDIT) {
-                    //变成完成状态
-                    showDelete();
-                } else {
-                    //变成编辑状态
-                    hideDelete();
-                }
-            }
+        btnDelete.setOnClickListener(v -> {
+            adapter.deleteData();
+            adapter.showTotalPrice();
+            //显示空空如也
+            checkData();
+            adapter.checkAll();
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.deleteData();
-                adapter.showTotalPrice();
-                //显示空空如也
-                checkData();
-                adapter.checkAll();
-            }
-        });
-
-        tvEmptyCartTobuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, MainActivity.class);
-                startActivity(intent);
-                Constants.isBackHome = true;
-            }
+        tvEmptyCartTobuy.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, MainActivity.class);
+            startActivity(intent);
+            Constants.isBackHome = true;
         });
     }
 

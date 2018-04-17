@@ -3,6 +3,7 @@ package com.manle.saitamall.app;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -20,6 +21,8 @@ import com.manle.saitamall.utils.CacheUtils;
 import com.manle.saitamall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import org.joda.time.LocalDate;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -116,7 +119,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 if (response != null) {
                     Gson gson = new Gson();
                     User user = gson.fromJson(response, User.class);
-                    MyAppliction.setUser(user);
+                    CacheUtils.putString(LoginActivity.this,"user",response);
                     Toast.makeText(LoginActivity.this, "登陆成功" + user.getUserName(), Toast.LENGTH_SHORT).show();
                     Intent intent = getIntent();
                     intent.putExtra("user",user);
@@ -125,8 +128,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 } else {
                     Toast.makeText(LoginActivity.this, "用户名或密码输入错误", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
     }

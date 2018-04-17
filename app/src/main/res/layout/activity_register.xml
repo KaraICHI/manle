@@ -15,7 +15,7 @@
         >
 
         <ImageButton
-            android:id="@+id/ib_login_back"
+            android:id="@+id/ib_register_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/top_bar_left_back"

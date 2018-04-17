@@ -1,18 +1,18 @@
 package com.manle.saitamall.bean;
 
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-import com.sxu.yusa.domain.enumeration.OrderStatus;
 
 /**
  * A DTO for the OrderMaster entity.
  */
-public class OrderMasterDTO implements Serializable {
+public class OrderMaster  extends JSONObject implements Serializable{
 
+    private static final long serialVersionUID = -4172103825583550040L;
     private Long id;
 
     private String orderNumber;
@@ -20,8 +20,6 @@ public class OrderMasterDTO implements Serializable {
     private BigDecimal totalPrices;
 
     private Integer totalQuanity;
-
-    private OrderStatus orderStatus;
 
     private Long addressId;
 
@@ -59,13 +57,6 @@ public class OrderMasterDTO implements Serializable {
         this.totalQuanity = totalQuanity;
     }
 
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
 
     public Long getAddressId() {
         return addressId;
@@ -92,26 +83,11 @@ public class OrderMasterDTO implements Serializable {
             return false;
         }
 
-        OrderMasterDTO orderMasterDTO = (OrderMasterDTO) o;
-        if(orderMasterDTO.getId() == null || getId() == null) {
+        OrderMaster orderMaster = (OrderMaster) o;
+        if(orderMaster.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), orderMasterDTO.getId());
+        return Objects.equals(getId(), orderMaster.getId());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "OrderMasterDTO{" +
-            "id=" + getId() +
-            ", orderNumber='" + getOrderNumber() + "'" +
-            ", totalPrices=" + getTotalPrices() +
-            ", totalQuanity=" + getTotalQuanity() +
-            ", orderStatus='" + getOrderStatus() + "'" +
-            "}";
-    }
 }

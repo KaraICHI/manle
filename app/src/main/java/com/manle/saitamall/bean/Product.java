@@ -1,5 +1,8 @@
 package com.manle.saitamall.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import org.joda.time.LocalDate;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -20,7 +23,7 @@ public class Product extends JSONObject implements Serializable {
 
     private BigDecimal originPrice;
 
-    private Date produceDate;
+    private String produceDate;
 
     private Integer period;
 
@@ -74,13 +77,6 @@ public class Product extends JSONObject implements Serializable {
         this.originPrice = originPrice;
     }
 
-    public Date getProduceDate() {
-        return produceDate;
-    }
-
-    public void setProduceDate(Date produceDate) {
-        this.produceDate = produceDate;
-    }
 
     public Integer getPeriod() {
         return period;
@@ -160,5 +156,14 @@ public class Product extends JSONObject implements Serializable {
 
     public void setThemeThemeName(String themeThemeName) {
         this.themeThemeName = themeThemeName;
+    }
+
+
+    public String getProduceDate() {
+        return produceDate;
+    }
+
+    public void setProduceDate(String produceDate) {
+        this.produceDate = produceDate;
     }
 }

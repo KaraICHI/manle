@@ -1,5 +1,7 @@
 package com.manle.saitamall.bean;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -7,8 +9,9 @@ import java.util.Objects;
 /**
  * A DTO for the ArticalCommentReply entity.
  */
-public class ArticalCommentReply implements Serializable {
+public class ArticalCommentReply  extends JSONObject implements Serializable {
 
+    private static final long serialVersionUID = 4210097711578904343L;
     private Long id;
 
     private String content;

@@ -1,24 +1,27 @@
 package com.manle.saitamall.bean;
 
 
-import java.time.LocalDate;
+import org.joda.time.LocalDate;
+import org.json.JSONObject;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
- * A DTO for the CommentReply entity.
+ * A DTO for the OrderComment entity.
  */
-public class CommentReplyDTO implements Serializable {
+public class OrderComment  extends JSONObject implements Serializable {
 
+    private static final long serialVersionUID = -2788167314225745149L;
     private Long id;
+
+    private Float level;
 
     private String content;
 
     private LocalDate creatDate;
 
-    private Long orderCommentId;
+    private Long orderItemId;
 
     private Long clientUserId;
 
@@ -28,6 +31,14 @@ public class CommentReplyDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Float getLevel() {
+        return level;
+    }
+
+    public void setLevel(Float level) {
+        this.level = level;
     }
 
     public String getContent() {
@@ -46,12 +57,12 @@ public class CommentReplyDTO implements Serializable {
         this.creatDate = creatDate;
     }
 
-    public Long getOrderCommentId() {
-        return orderCommentId;
+    public Long getOrderItemId() {
+        return orderItemId;
     }
 
-    public void setOrderCommentId(Long orderCommentId) {
-        this.orderCommentId = orderCommentId;
+    public void setOrderItemId(Long orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
     public Long getClientUserId() {
@@ -71,11 +82,11 @@ public class CommentReplyDTO implements Serializable {
             return false;
         }
 
-        CommentReplyDTO commentReplyDTO = (CommentReplyDTO) o;
-        if(commentReplyDTO.getId() == null || getId() == null) {
+        OrderComment orderComment = (OrderComment) o;
+        if(orderComment.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), commentReplyDTO.getId());
+        return Objects.equals(getId(), orderComment.getId());
     }
 
     @Override
@@ -85,8 +96,9 @@ public class CommentReplyDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CommentReplyDTO{" +
+        return "OrderComment{" +
             "id=" + getId() +
+            ", level=" + getLevel() +
             ", content='" + getContent() + "'" +
             ", creatDate='" + getCreatDate() + "'" +
             "}";

@@ -10,7 +10,13 @@ public class Constants {
 
    public static final String CLIENT_USER = BASE_MANLE + "/api/client-users";
 
-   public static final String USER_FIGURE = CLIENT_USER + "/user-figure";
+   public static final String USER_FIGURE = CLIENT_USER + "/upload";
+
+   // 请求图片基本URL
+   public static final String BASE_SERVER_IMAGE = BASE_MANLE + "/templates/images/";
+   public static final String AVATAR_IMAGE = BASE_SERVER_IMAGE + "avatar/";
+
+
 
 
  // 请求Json数据基本URL

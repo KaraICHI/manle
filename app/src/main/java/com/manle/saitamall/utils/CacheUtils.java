@@ -42,4 +42,24 @@ public class CacheUtils {
 
         return result;
     }
+
+    public static Long getLong(Context mContext, String key) {
+        SharedPreferences sp = mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+        return sp.getLong(key, -1);
+    }
+
+    public static void putLong(Context mContext, String key, Long value) {
+        SharedPreferences sp = mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+        sp.edit().putLong(key, value).commit();
+    }
+    public static Float getFloat(Context mContext, String key) {
+        SharedPreferences sp = mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+        return sp.getFloat(key,0f);
+    }
+
+    public static void putFloat(Context mContext, String key, Float value) {
+        SharedPreferences sp = mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+        sp.edit().putFloat(key, value).commit();
+    }
+
 }

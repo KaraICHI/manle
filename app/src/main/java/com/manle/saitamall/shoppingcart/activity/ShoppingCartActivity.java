@@ -21,6 +21,7 @@ import com.manle.saitamall.app.MyAppliction;
 import com.manle.saitamall.shoppingcart.adapter.ShopCartAdapter;
 import com.manle.saitamall.home.bean.GoodsBean;
 import com.manle.saitamall.shoppingcart.utils.CartProvider;
+import com.manle.saitamall.utils.CacheUtils;
 
 import java.util.List;
 
@@ -151,10 +152,9 @@ public class ShoppingCartActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
-
         findViews();
-
-        if (MyAppliction.getUser()==null){
+        String user= CacheUtils.getString(ShoppingCartActivity.this,"user");
+        if (user==null||user.equals("")){
             tvShopcartEdit.setVisibility(View.GONE);
             ll_not_login.setVisibility(View.VISIBLE);
             ll_check_all.setVisibility(View.GONE);

@@ -19,6 +19,7 @@ import com.manle.saitamall.utils.BitmapUtils;
 import com.manle.saitamall.utils.Constants;
 import com.manle.saitamall.utils.DensityUtil;
 import com.bumptech.glide.Glide;
+import com.manle.saitamall.utils.GlideCircleTransform;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -67,7 +68,8 @@ public class HotPostListViewAdapter extends BaseAdapter {
         changeImageSize(holder.tvHotLikes,holder.tvHotComments);
         HotPostBean.ResultBean resultBean = result.get(position);
         holder.tvHotUsername.setText(resultBean.getUsername());
-
+        Glide.with(mContext).load(Constants.BASE_URl_IMAGE +resultBean.getAvatar()).centerCrop()
+                .transform(new GlideCircleTransform(mContext)).into(holder.ibNewPostAvatar);
         SimpleDateFormat myFmt = new SimpleDateFormat("MM-dd HH:mm");
         holder.tvHotAddtime.setText(myFmt.format(Integer.parseInt(resultBean.getAdd_time())));
 

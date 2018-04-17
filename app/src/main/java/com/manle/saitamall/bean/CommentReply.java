@@ -1,28 +1,25 @@
 package com.manle.saitamall.bean;
 
 
-import java.time.LocalDate;
-import javax.validation.constraints.*;
+import org.joda.time.LocalDate;
+import org.json.JSONObject;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
- * A DTO for the OrderComment entity.
+ * A DTO for the CommentReply entity.
  */
-public class OrderCommentDTO implements Serializable {
+public class CommentReply extends JSONObject implements Serializable {
 
+    private static final long serialVersionUID = -4159073556024819196L;
     private Long id;
-
-    @NotNull
-    private Float level;
 
     private String content;
 
     private LocalDate creatDate;
 
-    private Long orderItemId;
+    private Long orderCommentId;
 
     private Long clientUserId;
 
@@ -32,14 +29,6 @@ public class OrderCommentDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Float getLevel() {
-        return level;
-    }
-
-    public void setLevel(Float level) {
-        this.level = level;
     }
 
     public String getContent() {
@@ -58,12 +47,12 @@ public class OrderCommentDTO implements Serializable {
         this.creatDate = creatDate;
     }
 
-    public Long getOrderItemId() {
-        return orderItemId;
+    public Long getOrderCommentId() {
+        return orderCommentId;
     }
 
-    public void setOrderItemId(Long orderItemId) {
-        this.orderItemId = orderItemId;
+    public void setOrderCommentId(Long orderCommentId) {
+        this.orderCommentId = orderCommentId;
     }
 
     public Long getClientUserId() {
@@ -83,11 +72,11 @@ public class OrderCommentDTO implements Serializable {
             return false;
         }
 
-        OrderCommentDTO orderCommentDTO = (OrderCommentDTO) o;
-        if(orderCommentDTO.getId() == null || getId() == null) {
+        CommentReply commentReply = (CommentReply) o;
+        if(commentReply.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), orderCommentDTO.getId());
+        return Objects.equals(getId(), commentReply.getId());
     }
 
     @Override
@@ -97,9 +86,8 @@ public class OrderCommentDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderCommentDTO{" +
+        return "CommentReply{" +
             "id=" + getId() +
-            ", level=" + getLevel() +
             ", content='" + getContent() + "'" +
             ", creatDate='" + getCreatDate() + "'" +
             "}";

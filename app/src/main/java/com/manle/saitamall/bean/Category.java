@@ -1,17 +1,20 @@
 package com.manle.saitamall.bean;
 
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the Theme entity.
+ * A DTO for the Category entity.
  */
-public class ThemeDTO implements Serializable {
+public class Category  extends JSONObject implements Serializable{
 
+    private static final long serialVersionUID = 8630943546972455114L;
     private Long id;
 
-    private String themeName;
+    private String categoryName;
 
     public Long getId() {
         return id;
@@ -21,12 +24,12 @@ public class ThemeDTO implements Serializable {
         this.id = id;
     }
 
-    public String getThemeName() {
-        return themeName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setThemeName(String themeName) {
-        this.themeName = themeName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override
@@ -38,11 +41,11 @@ public class ThemeDTO implements Serializable {
             return false;
         }
 
-        ThemeDTO themeDTO = (ThemeDTO) o;
-        if(themeDTO.getId() == null || getId() == null) {
+        Category category = (Category) o;
+        if(category.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), themeDTO.getId());
+        return Objects.equals(getId(), category.getId());
     }
 
     @Override
@@ -52,9 +55,9 @@ public class ThemeDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ThemeDTO{" +
+        return "Category{" +
             "id=" + getId() +
-            ", themeName='" + getThemeName() + "'" +
+            ", categoryName='" + getCategoryName() + "'" +
             "}";
     }
 }

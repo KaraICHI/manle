@@ -19,16 +19,16 @@
             <RelativeLayout
                 android:id="@+id/rl_person_header"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="200dp"
                 android:background="#f00">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="250dp"
                     android:scaleType="centerCrop"
                     android:background="@drawable/new_user_icon_background_1" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/ib_user_avator"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -46,8 +46,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#fff"
+                        android:textColor="#050505"
                         android:text="用户名"
+                        android:layout_marginRight="10dp"
                         />
                     <TextView
                         android:id="@+id/tv_point"
@@ -231,9 +232,10 @@
                 android:background="#eee" />
 
             <TextView
+                android:id="@+id/tv_modify_user"
                 style="@style/TextStyle"
                 android:drawableLeft="@drawable/user_icon_ticket"
-                android:text="我的电子票" />
+                android:text="修改信息" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="8dp"

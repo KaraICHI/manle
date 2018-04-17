@@ -1,16 +1,17 @@
 package com.manle.saitamall.bean;
 
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
  * A DTO for the OrderItem entity.
  */
-public class OrderItemDTO implements Serializable {
+public class OrderItem  extends JSONObject implements Serializable {
 
+    private static final long serialVersionUID = -120092599051089506L;
     private Long id;
 
     private String productName;
@@ -90,11 +91,11 @@ public class OrderItemDTO implements Serializable {
             return false;
         }
 
-        OrderItemDTO orderItemDTO = (OrderItemDTO) o;
-        if(orderItemDTO.getId() == null || getId() == null) {
+        OrderItem orderItem = (OrderItem) o;
+        if(orderItem.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), orderItemDTO.getId());
+        return Objects.equals(getId(), orderItem.getId());
     }
 
     @Override
@@ -104,7 +105,7 @@ public class OrderItemDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "OrderItemDTO{" +
+        return "OrderItem{" +
             "id=" + getId() +
             ", productName='" + getProductName() + "'" +
             ", productPrice=" + getProductPrice() +
