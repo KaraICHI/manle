@@ -1,6 +1,8 @@
 package com.manle.saitamall.bean;
 
 
+import com.manle.saitamall.bean.enumeration.OrderStatus;
+
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -21,10 +23,11 @@ public class OrderMaster  extends JSONObject implements Serializable{
 
     private Integer totalQuanity;
 
+    private OrderStatus orderStatus;
+
     private Long addressId;
 
     private Long clientUserId;
-
     public Long getId() {
         return id;
     }
@@ -90,4 +93,11 @@ public class OrderMaster  extends JSONObject implements Serializable{
         return Objects.equals(getId(), orderMaster.getId());
     }
 
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 }

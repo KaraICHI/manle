@@ -1,22 +1,27 @@
 package com.manle.saitamall.order.fragment;
 
+import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.manle.saitamall.R;
 import com.manle.saitamall.base.BaseFragment;
-import com.manle.saitamall.community.adapter.HotPostListViewAdapter;
-import com.manle.saitamall.community.bean.HotPostBean;
-import com.manle.saitamall.community.fragment.HotPostFragment;
+import com.manle.saitamall.bean.OrderItem;
+import com.manle.saitamall.bean.OrderMaster;
+import com.manle.saitamall.bean.User;
+import com.manle.saitamall.bean.enumeration.OrderStatus;
 import com.manle.saitamall.home.uitls.SpaceItemDecoration;
+import com.manle.saitamall.order.activity.OrderItemActivity;
 import com.manle.saitamall.order.adapter.OrderItemAdapter;
-import com.manle.saitamall.order.bean.OrderMasterBean;
+import com.manle.saitamall.order.adapter.OrderMasterAdapter;
 import com.manle.saitamall.utils.CacheUtils;
 import com.manle.saitamall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.List;
@@ -24,13 +29,17 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Request;
 
+import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
+
 /**
  * Created by Administrator on 2018/4/6.
  */
 
 public class OrderWaitToSendFragment extends BaseFragment{
     RecyclerView recyclerView;
-    private List<OrderMasterBean.ResultBean> result;
+    private List<OrderMaster> result;
+
+    private User user;
     @Override
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_order, null);
@@ -42,13 +51,16 @@ public class OrderWaitToSendFragment extends BaseFragment{
     @Override
     public void initData() {
         super.initData();
+        user = new Gson().fromJson(CacheUtils.getString(mContext,"user"),User.class);
         getDataFromNet();
     }
 
     private void getDataFromNet() {
         OkHttpUtils
                 .get()
-                .url(Constants.HOT_POST_URL)
+                .url(Constants.ORDER_MASTER_USER)
+                .addParams("id",user.getId()+"")
+                .addParams("status",OrderStatus.WAIT_TO_SEND+"")
                 .id(100)
                 .build()
                 .execute(new StringCallback() {
@@ -89,13 +101,25 @@ public class OrderWaitToSendFragment extends BaseFragment{
 
     private void processData(String response) {
         Gson gson =new Gson();
-        OrderMasterBean orderMasterBean = gson.fromJson(response,OrderMasterBean.class);
-        result = orderMasterBean.getResult();
-        CacheUtils.putString(mContext,"orderMasterJson",response);
+        try{
+            result = gson.fromJson(response,  new TypeToken<List<OrderMaster>>(){}.getType());
+        }catch (Exception e){
+            Log.e(TAG, "processData: "+e.getMessage() );
+        }
 
-        OrderItemAdapter adapter = new OrderItemAdapter(mContext, result);
+        if (result.size()>0) Log.e(TAG, "processData: " +result.get(0).getOrderNumber());
+        CacheUtils.putString(mContext,"orderMasterJson",response);
+        OrderMasterAdapter adapter = new OrderMasterAdapter(mContext, result);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.addItemDecoration(new SpaceItemDecoration(3));
+        adapter.setOnItemClickListener(data -> {
+            String masterId = data.getId()+"";
+            Intent intent = new Intent(mContext, OrderItemActivity.class);
+            intent.putExtra("masterId",masterId);
+            startActivity(intent);
+        });
+
     }
 
 

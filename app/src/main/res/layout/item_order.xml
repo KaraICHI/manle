@@ -3,14 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp"
+    android:padding="10dp"
     android:background="#fff"
     >
-    <ImageView
-        android:id="@+id/iv_product_figure"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/new_user_icon_1"
+    <TextView
+        android:id="@+id/iv_product_id"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/icon_rect_order"
+        android:layout_centerVertical="true"
+        android:textSize="23sp"
+        android:textColor="#fff"
+        android:gravity="center"
         />
     <TextView
         android:id="@+id/tv_order_number"
@@ -25,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-       android:layout_marginTop="25dp"
+       android:layout_marginTop="22dp"
         android:text="x3"
         />
     <TextView
@@ -35,6 +39,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="40dp"
         android:text="RMB:242"
+        android:textColor="@color/theme_red"
         />
 
 </RelativeLayout>

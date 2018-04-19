@@ -18,6 +18,7 @@ import com.manle.saitamall.R;
 import com.manle.saitamall.app.LoginActivity;
 import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.bean.User;
+import com.manle.saitamall.order.activity.AllOrderActivity;
 import com.manle.saitamall.user.activity.CollectorMangerActivity;
 import com.manle.saitamall.user.activity.UserModifyActivity;
 import com.manle.saitamall.utils.CacheUtils;
@@ -55,6 +56,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     TextView tvToLogin;
     @Bind(R.id.tv_modify_user)
     TextView tvModifyUser;
+    @Bind(R.id.tv_to_all_order)
+    TextView tvToAllOrder;
 
 
     User user;
@@ -70,6 +73,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         tvToLogin.setOnClickListener(this);
         ibUserAvator.setOnClickListener(this);
         tvModifyUser.setOnClickListener(this);
+        tvToAllOrder.setOnClickListener(this);
         user = new Gson().fromJson(CacheUtils.getString(mContext, "user"), User.class);
         if (user == null) {
             llNotLogin.setVisibility(View.VISIBLE);
@@ -149,6 +153,11 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 Intent intent2 = new Intent(mContext, UserModifyActivity.class);
                 startActivityForResult(intent2, 2);
                 break;
+            case R.id.tv_to_all_order:
+                Intent intent3 = new Intent(mContext, AllOrderActivity.class);
+                startActivity(intent3);
+                break;
+
         }
     }
 

@@ -79,10 +79,12 @@
                     android:textColor="#5d5d5d" />
 
                 <TextView
+                    android:id="@+id/tv_to_all_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:drawableRight="@drawable/home_arrow_right"
+                    android:drawablePadding="10dp"
                     android:text="查看全部订单"
                     android:textColor="#5d5d5d" />
             </RelativeLayout>
@@ -92,7 +94,7 @@
                 android:layout_height="1dp"
                 android:background="#eee" />
 
-            <LinearLayout
+        <!--    <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
@@ -202,7 +204,7 @@
                         android:textSize="12dp"
                         />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <View
                 android:layout_width="match_parent"

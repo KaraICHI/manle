@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -49,7 +52,7 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
 
     private LinearLayout llGoodsListHead;
     private ImageButton ibGoodsListBack;
-    private TextView tvGoodsListSearch;
+    private EditText tvGoodsListSearch;
     private ImageButton ibGoodsListHome;
     private TextView tvGoodsListSort;
     private LinearLayout llGoodsListPrice;
@@ -112,7 +115,7 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
     private void findViews() {
         llGoodsListHead = (LinearLayout) findViewById(R.id.ll_goods_list_head);
         ibGoodsListBack = (ImageButton) findViewById(R.id.ib_goods_list_back);
-        tvGoodsListSearch = (TextView) findViewById(R.id.tv_goods_list_search);
+        tvGoodsListSearch = (EditText) findViewById(R.id.tv_goods_list_search);
         ibGoodsListHome = (ImageButton) findViewById(R.id.ib_goods_list_home);
         tvGoodsListSort = (TextView) findViewById(R.id.tv_goods_list_sort);
         llGoodsListPrice = (LinearLayout) findViewById(R.id.ll_goods_list_price);
@@ -143,7 +146,7 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
 
         ibGoodsListBack.setOnClickListener(this);
         ibGoodsListHome.setOnClickListener(this);
-        tvGoodsListSearch.setOnClickListener(this);
+
         llGoodsListPrice.setOnClickListener(this);
         tvGoodsListSort.setOnClickListener(this);
         tvGoodsListSelect.setOnClickListener(this);
@@ -162,6 +165,23 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
 
         rl_price_30_50.setOnClickListener(this);
         rl_theme_note.setOnClickListener(this);
+        tvGoodsListSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e(TAG, "beforeTextChanged: ==========" );
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e(TAG, "onTextChanged: ==============" );
+                adapter1.getFilter().filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         listView = (ExpandableListView) findViewById(R.id.expandableListView);
 
@@ -267,6 +287,7 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
         position = intent.getIntExtra("position", -1);
 
         getDataFromNet();
+
         ll_select_root.setVisibility(View.VISIBLE);
         ib_drawer_layout_back.setVisibility(View.VISIBLE);
         showSelectorLayout();
@@ -420,19 +441,16 @@ public class GoodsListActivity extends Activity implements View.OnClickListener 
                         recyclerview.addItemDecoration(new SpaceItemDecoration(10));
                         recyclerview.setAdapter(adapter1);
 
-                        adapter1.setOnItemClickListener(new GoodsListAdapter.OnItemClickListener() {
-                            @Override
-                            public void setOnItemClickListener(TypeListBean.ResultBean.PageDataBean data) {
-                                String name = data.getName();
-                                String cover_price = data.getCover_price();
-                                String figure = data.getFigure();
-                                String product_id = data.getProduct_id();
+                        adapter1.setOnItemClickListener(data -> {
+                            String name = data.getName();
+                            String cover_price = data.getCover_price();
+                            String figure = data.getFigure();
+                            String product_id = data.getProduct_id();
 
-                                GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
-                                Intent intent = new Intent(GoodsListActivity.this, GoodsInfoActivity.class);
-                                intent.putExtra("goods_bean", goodsBean);
-                                startActivity(intent);
-                            }
+                            GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
+                            Intent intent = new Intent(GoodsListActivity.this, GoodsInfoActivity.class);
+                            intent.putExtra("goods_bean", goodsBean);
+                            startActivity(intent);
                         });
                     }
                     break;

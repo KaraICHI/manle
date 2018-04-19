@@ -69,13 +69,10 @@ public class ShopCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         });
 
-        cb_all.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checked = getCb_all().isChecked();
-                checkAll_none(checked);
-                showTotalPrice();
-            }
+        cb_all.setOnClickListener(v -> {
+            boolean checked = getCb_all().isChecked();
+            checkAll_none(checked);
+            showTotalPrice();
         });
     }
 
@@ -163,12 +160,9 @@ public class ShopCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvPriceGov = (TextView) itemView.findViewById(R.id.tv_price_gov);
             numberAddSubView = (NumberAddSubView) itemView.findViewById(R.id.numberAddSubView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onItemClickListener != null) {
-                        onItemClickListener.onItemClickListener(v, getLayoutPosition());
-                    }
+            itemView.setOnClickListener(v -> {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClickListener(v, getLayoutPosition());
                 }
             });
         }

@@ -4,29 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="23dp"
-    >
+    android:paddingTop="23dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#fff"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        >
+        android:padding="10dp">
 
         <ImageButton
             android:id="@+id/ib_shopcart_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_centerVertical="true"
             android:background="@drawable/top_bar_left_back" />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_centerInParent="true"
             android:text="购物车"
             android:textColor="#303235"
             android:textSize="20sp" />
@@ -35,9 +32,11 @@
             android:id="@+id/tv_shopcart_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text="编辑"
             android:textColor="#303235" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -56,7 +55,8 @@
             android:background="#eeee" />
 
         <include layout="@layout/empty_cart" />
-        <include layout="@layout/not_login"/>
+
+        <include layout="@layout/not_login" />
     </FrameLayout>
 
     <FrameLayout

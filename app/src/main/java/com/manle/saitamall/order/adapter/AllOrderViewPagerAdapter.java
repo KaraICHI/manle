@@ -18,7 +18,7 @@ import java.util.List;
 
 public class AllOrderViewPagerAdapter extends FragmentPagerAdapter{
     private List<Fragment> fragmentList = new ArrayList<>();
-    private String[] titles = new String[]{"待付款", "待发货","待收货","完成","待评价"};
+    private String[] titles = new String[]{"待付款", "待发货","待收货","已完成","待评价"};
 
 
 

@@ -205,13 +205,6 @@ public class ShoppingCartFragment extends BaseFragment implements View.OnClickLi
 
             adapter = new ShopCartAdapter(mContext, datas, tvShopcartTotal, cartProvider, checkboxAll, cbAll);
             recyclerview.setLayoutManager(new LinearLayoutManager(mContext));
-            recyclerview.addItemDecoration(new RecyclerView.ItemDecoration() {
-                @Override
-                public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                    super.getItemOffsets(outRect, view, parent, state);
-                    outRect.top = 10;
-                }
-            });
             recyclerview.setAdapter(adapter);
 
             ll_empty_shopcart.setVisibility(View.GONE);
