@@ -1,5 +1,6 @@
 package com.manle.saitamall.home.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -21,9 +22,11 @@ import android.widget.Toast;
 
 import com.manle.saitamall.R;
 import com.manle.saitamall.app.GoodsInfoActivity;
+import com.manle.saitamall.bean.Category;
+import com.manle.saitamall.bean.Product;
 import com.manle.saitamall.home.activity.GoodsListActivity;
 import com.manle.saitamall.home.bean.GoodsBean;
-import com.manle.saitamall.home.bean.ResultBean;
+import com.manle.saitamall.home.bean.HomeBean;
 import com.manle.saitamall.home.uitls.AlphaPageTransformer;
 import com.manle.saitamall.home.uitls.ScaleInTransformer;
 import com.manle.saitamall.utils.Constants;
@@ -36,6 +39,7 @@ import com.youth.banner.listener.OnLoadImageListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +54,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     /**
      * 数据Bean对象
      */
-    private ResultBean resultBean;
+    private HomeBean homeBean;
     /**
      * 五种类型
      */
@@ -66,7 +70,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     /**
      * 活动
      */
- //   public static final int ACT = 1;
+    //   public static final int ACT = 1;
 
     /**
      * 秒杀
@@ -89,14 +93,18 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
 
-    public HomeRecycleAdapter(Context mContext, ResultBean resultBean) {
+
+    int[] imgResourseBanner = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
+
+    public HomeRecycleAdapter(Context mContext, HomeBean homeBean) {
         this.mContext = mContext;
-        this.resultBean = resultBean;
+        this.homeBean = homeBean;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
     /**
      * 根据位置得到类型-系统调用
+     *
      * @param position
      * @return
      */
@@ -127,6 +135,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     /**
      * 返回总条数，共六种类型
+     *
      * @return
      */
     @Override
@@ -137,12 +146,12 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == BANNER) {
-            return new BannerViewHolder(mLayoutInflater.inflate(R.layout.banner_viewpager, null), mContext, resultBean);
+            return new BannerViewHolder(mLayoutInflater.inflate(R.layout.banner_viewpager, null), mContext, homeBean);
         } else if (viewType == CHANNEL) {
             return new ChannelViewHolder(mLayoutInflater.inflate(R.layout.channel_item, null), mContext);
         }/* else if (viewType == ACT) {
             return new ActViewHolder(mLayoutInflater.inflate(R.layout.act_item, null), mContext);
-        } */else if (viewType == SECKILL) {
+        } */ else if (viewType == SECKILL) {
             return new SeckillViewHolder(mLayoutInflater.inflate(R.layout.seckill_item, null), mContext);
         } else if (viewType == RECOMMEND) {
             return new RecommendViewHolder(mLayoutInflater.inflate(R.layout.recommend_item, null), mContext);
@@ -154,6 +163,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     /**
      * 绑定数据
+     *
      * @param holder
      * @param position
      */
@@ -161,22 +171,22 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == BANNER) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
-            bannerViewHolder.setData(resultBean.getBanner_info());
+            bannerViewHolder.setData(imgResourseBanner);
         } else if (getItemViewType(position) == CHANNEL) {
             ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
-            channelViewHolder.setData(resultBean.getChannel_info());
+            channelViewHolder.setData(homeBean.getCategoryInfo());
         }/* else if (getItemViewType(position) == ACT) {
             ActViewHolder actViewHolder = (ActViewHolder) holder;
-            actViewHolder.setData(resultBean.getAct_info());
-        } */else if (getItemViewType(position) == SECKILL) {
+            actViewHolder.setData(homeBean.getAct_info());
+        } */ else if (getItemViewType(position) == SECKILL) {
             SeckillViewHolder seckillViewHolder = (SeckillViewHolder) holder;
-            seckillViewHolder.setData(resultBean.getSeckill_info());
+            seckillViewHolder.setData(homeBean.getSeckillInfo());
         } else if (getItemViewType(position) == RECOMMEND) {
             RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
-            recommendViewHolder.setData(resultBean.getRecommend_info());
+            recommendViewHolder.setData(homeBean.getRecommendInfo());
         } else if (getItemViewType(position) == HOT) {
             HotViewHolder hotViewHolder = (HotViewHolder) holder;
-            hotViewHolder.setData(resultBean.getHot_info());
+            hotViewHolder.setData(homeBean.getHotInfo());
         }
     }
 
@@ -192,25 +202,21 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.mContext = mContext;
         }
 
-        public void setData(final List<ResultBean.HotInfoBean> data) {
+        public void setData(final List<Product> data) {
             HotGridViewAdapter adapter = new HotGridViewAdapter(mContext, data);
             gv_hot.setAdapter(adapter);
 
             //点击事件
-            gv_hot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
-                    String cover_price = data.get(position).getCover_price();
-                    String name = data.get(position).getName();
-                    String figure = data.get(position).getFigure();
-                    String product_id = data.get(position).getProduct_id();
-                    GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
+            gv_hot.setOnItemClickListener((parent, view, position, id) -> {
+                String cover_price = data.get(position).getCoverPrice() + "";
+                String name = data.get(position).getProductName();
+                String figure = data.get(position).getFigure();
+                String product_id = data.get(position).getId() + "";
+                GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
 
-                    Intent intent = new Intent(mContext, GoodsInfoActivity.class);
-                    intent.putExtra(GOODS_BEAN, goodsBean);
-                    mContext.startActivity(intent);
-                }
+                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                intent.putExtra(GOODS_BEAN, goodsBean);
+                mContext.startActivity(intent);
             });
         }
     }
@@ -227,7 +233,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.mContext = mContext;
         }
 
-        public void setData(final List<ResultBean.RecommendInfoBean> data) {
+        public void setData(final List<Product> data) {
             RecommendGridViewAdapter adapter = new RecommendGridViewAdapter(mContext, data);
             gv_recommend.setAdapter(adapter);
 
@@ -235,13 +241,12 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             gv_recommend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
-                    String cover_price = data.get(position).getCover_price();
-                    String name = data.get(position).getName();
+                    String cover_price = data.get(position).getCoverPrice() + "";
+                    String name = data.get(position).getProductName();
                     String figure = data.get(position).getFigure();
-                    String product_id = data.get(position).getProduct_id();
+                    String product_id = data.get(position).getId() + "";
                     GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
-//
+
                     Intent intent = new Intent(mContext, GoodsInfoActivity.class);
                     intent.putExtra(GOODS_BEAN, goodsBean);
                     mContext.startActivity(intent);
@@ -253,12 +258,13 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private boolean isFirst = true;
     private TextView tvTime;
     private int dt;
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
                 dt = dt - 1000;
-                SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
                 tvTime.setText(sd.format(new Date(dt)));
 
                 handler.removeMessages(0);
@@ -285,18 +291,23 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
                     super.getItemOffsets(outRect, view, parent, state);
-                    outRect.right=20;
+                    outRect.right = 20;
                 }
             });
             this.mContext = mContext;
         }
 
 
-        public void setData(final ResultBean.SeckillInfoBean data) {
+        public void setData(final List<Product> data) {
             //设置时间
             if (isFirst) {
-//                dt = (int) (Integer.parseInt(data.getEnd_time()) - System.currentTimeMillis());
-                dt = (int) (Integer.parseInt(data.getEnd_time()) - (Integer.parseInt(data.getStart_time())));
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR, 24);
+                calendar.set(Calendar.SECOND, 59);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.MILLISECOND, 59);
+                dt = (int) (calendar.getTimeInMillis() - System.currentTimeMillis());
+                //     dt = (int) (Integer.parseInt(data.getEnd_time()) - (Integer.parseInt(data.getStart_time())));
                 isFirst = false;
             }
 
@@ -309,28 +320,25 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             handler.sendEmptyMessageDelayed(0, 1000);
 
             //点击事件
-            adapter.setOnSeckillRecyclerView(new SeckillRecyclerViewAdapter.OnSeckillRecyclerView() {
-                @Override
-                public void onClick(int position) {
-                    ResultBean.SeckillInfoBean.ListBean listBean = data.getList().get(position);
-                    String name = listBean.getName();
-                    String cover_price = listBean.getCover_price();
-                    String figure = listBean.getFigure();
-                    String product_id = listBean.getProduct_id();
-                    GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
+            adapter.setOnSeckillRecyclerView(position -> {
+                Product listBean = data.get(position);
+                String name = listBean.getProductName();
+                String cover_price = listBean.getCoverPrice() + "";
+                String figure = listBean.getFigure();
+                String product_id = listBean.getId() + "";
+                GoodsBean goodsBean = new GoodsBean(name, cover_price, figure, product_id);
 //
-                    Intent intent = new Intent(mContext, GoodsInfoActivity.class);
-                    intent.putExtra(GOODS_BEAN, goodsBean);
-                    mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+                intent.putExtra(GOODS_BEAN, goodsBean);
+                mContext.startActivity(intent);
 
-                    // Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
-                }
+                // Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
             });
 
         }
     }
 
-    class ActViewHolder extends RecyclerView.ViewHolder {
+   /* class ActViewHolder extends RecyclerView.ViewHolder {
         public ViewPager actViewPager;
         public Context mContext;
 
@@ -340,11 +348,11 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.mContext = mContext;
         }
 
-        public void setData(final List<ResultBean.ActInfoBean> data) {
+        public void setData(final List<Product> data) {
             actViewPager.setPageMargin(20);
             actViewPager.setOffscreenPageLimit(3);
             actViewPager.setPageTransformer(true, new AlphaPageTransformer(new ScaleInTransformer()));
-            actViewPager.setAdapter(new ActAdapter(mContext,resultBean.getAct_info()));
+            actViewPager.setAdapter(new ActAdapter(mContext,homeBean.getAct_info()));
 
 
 
@@ -366,7 +374,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 }
             });
         }
-    }
+    }*/
 
     class ChannelViewHolder extends RecyclerView.ViewHolder {
         public GridView gvChannel;
@@ -378,7 +386,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             this.mContext = mContext;
         }
 
-        public void setData(final List<ResultBean.ChannelInfoBean> channel_info) {
+        public void setData(final List<Category> channel_info) {
             gvChannel.setAdapter(new ChannelAdapter(mContext, channel_info));
 
             //点击事件
@@ -401,41 +409,48 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class BannerViewHolder extends RecyclerView.ViewHolder {
         public Banner banner;
         public Context mContext;
-        public ResultBean resultBean;
+        public HomeBean homeBean;
 
-        public BannerViewHolder(View itemView, Context context, ResultBean resultBean) {
+        public BannerViewHolder(View itemView, Context context, HomeBean homeBean) {
             super(itemView);
             banner = (Banner) itemView.findViewById(R.id.banner);
             this.mContext = context;
-            this.resultBean = resultBean;
+            this.homeBean = homeBean;
         }
 
-        public void setData(final List<ResultBean.BannerInfoBean> banner_info) {
+        public void setData(final int[] banner_info) {
 
             banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
             //如果你想用自己项目的图片加载,那么----->自定义图片加载框架
-            List<String> imageUris = new ArrayList<>();
-            for (int i = 0; i < resultBean.getBanner_info().size(); i++) {
-                imageUris.add(resultBean.getBanner_info().get(i).getImage());
+            List<Integer> imageUris = new ArrayList<>();
+            for (int i = 0; i < imgResourseBanner.length; i++) {
+                imageUris.add(imgResourseBanner[i]);
             }
             banner.setBannerAnimation(Transformer.CubeIn);
             banner.setImages(imageUris, new OnLoadImageListener() {
                 @Override
                 public void OnLoadImage(ImageView view, Object url) {
-                    /**
-                     * 这里你可以根据框架灵活设置
-                     */
+                    view.setImageResource((int) url);
+                }
+            });
+
+         /*   banner.setImages(imageUris, new OnLoadImageListener() {
+                @Override
+                public void OnLoadImage(ImageView view, Object url) {
+                    *//**
+             * 这里你可以根据框架灵活设置
+             *//*
                     Glide.with(mContext)
                             .load(Constants.BASE_URl_IMAGE + url)
                             .into(view);
                 }
-            });
-            //设置点击事件
+            });*/
+        /*    //设置点击事件
             banner.setOnBannerClickListener(new OnBannerClickListener() {
                 @Override
                 public void OnBannerClick(int position) {
-                    if(position - 1 < banner_info.size()){
-                        int option = banner_info.get(position - 1).getOption();
+                    if(position - 1 < imageUris.size()){
+                        int option = imageUris.get(position - 1).getOption();
                         String product_id = "";
                         String name = "";
                         String cover_price = "";
@@ -461,7 +476,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }
 
                 }
-            });
+            });*/
 
         }
     }

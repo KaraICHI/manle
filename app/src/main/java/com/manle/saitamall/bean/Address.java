@@ -59,4 +59,14 @@ public class Address extends JSONObject implements Serializable{
     public void setClientUserId(Long clientUserId) {
         this.clientUserId = clientUserId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        Address addressO = (Address)o;
+        if (addressO.getPhone().equals(this.getPhone())&&addressO.getAddress()
+                .equals(this.getAddress())&&addressO.getConsignee().equals(this.getConsignee())){
+            return true;
+        }
+        return false;
+    }
 }

@@ -61,10 +61,6 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
     private CartProvider cartProvider;
     // private Boolean isFirst = true;
 
-    /* //模拟商家的数组
-     private String[] sellers = new String[]{"尚硅谷", "画影工作室", "Wacom"};
-     private List<GoodsList> goodsLists;
-    private GoodsList goodsList;*/
     private List<GoodsBean> goodsBeans;
     private GoodsBean goods_bean;
 
@@ -213,7 +209,8 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         String figure = goodsBean.getFigure();
         String product_id = goodsBean.getProduct_id();
 
-        Glide.with(this).load(Constants.BASE_URl_IMAGE + figure).into(ivGoodInfoImage);
+        Glide.with(this).load(Constants.BASE_SERVER_IMAGE + figure).into(ivGoodInfoImage);
+
         if (name != null) {
             tvGoodInfoName.setText(name);
         }
@@ -259,7 +256,7 @@ public class GoodsInfoActivity extends Activity implements View.OnClickListener 
         Button bt_goodinfo_confim = (Button) view.findViewById(R.id.bt_goodinfo_confim);
 
         // 加载图片
-        Glide.with(GoodsInfoActivity.this).load(Constants.BASE_URl_IMAGE + goods_bean.getFigure()).into(iv_goodinfo_photo);
+        Glide.with(GoodsInfoActivity.this).load(Constants.BASE_SERVER_IMAGE + goods_bean.getFigure()).into(iv_goodinfo_photo);
 
         // 名称
         tv_goodinfo_name.setText(goods_bean.getName());

@@ -212,6 +212,7 @@
                 android:background="#eee" />
 
             <TextView
+                android:id="@+id/tv_to_address"
                 style="@style/TextStyle"
                 android:drawableLeft="@drawable/user_channel_icon_address"
                 android:text="收货地址" />

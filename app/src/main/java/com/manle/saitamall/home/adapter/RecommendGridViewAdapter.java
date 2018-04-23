@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.manle.saitamall.R;
+import com.manle.saitamall.bean.Product;
 import com.manle.saitamall.home.bean.ResultBean;
 import com.manle.saitamall.utils.Constants;
 import com.bumptech.glide.Glide;
@@ -22,16 +23,16 @@ import butterknife.ButterKnife;
  */
 public class RecommendGridViewAdapter extends BaseAdapter {
     private Context mContext;
-    private List<ResultBean.RecommendInfoBean> data;
+    private List<Product> data;
 
-    public RecommendGridViewAdapter(Context mContext, List<ResultBean.RecommendInfoBean> data) {
+    public RecommendGridViewAdapter(Context mContext, List<Product> data) {
         this.mContext = mContext;
         this.data = data;
     }
 
     @Override
     public int getCount() {
-        return data.size();
+        return 6;
     }
 
     @Override
@@ -55,12 +56,12 @@ public class RecommendGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ResultBean.RecommendInfoBean recommendInfoBean = data.get(position);
+        Product recommendInfoBean = data.get(position);
         Glide.with(mContext)
-                .load(Constants.BASE_URl_IMAGE +recommendInfoBean.getFigure())
+                .load(Constants.BASE_SERVER_IMAGE +recommendInfoBean.getFigure())
                 .into(holder.ivRecommend);
-        holder.tvName.setText(recommendInfoBean.getName());
-        holder.tvPrice.setText("￥" + recommendInfoBean.getCover_price());
+        holder.tvName.setText(recommendInfoBean.getProductName());
+        holder.tvPrice.setText("RMB " + recommendInfoBean.getCoverPrice());
         return convertView;
     }
 

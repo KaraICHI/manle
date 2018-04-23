@@ -19,6 +19,7 @@ import com.manle.saitamall.app.LoginActivity;
 import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.bean.User;
 import com.manle.saitamall.order.activity.AllOrderActivity;
+import com.manle.saitamall.user.activity.AddressMangerActivity;
 import com.manle.saitamall.user.activity.CollectorMangerActivity;
 import com.manle.saitamall.user.activity.UserModifyActivity;
 import com.manle.saitamall.utils.CacheUtils;
@@ -58,6 +59,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     TextView tvModifyUser;
     @Bind(R.id.tv_to_all_order)
     TextView tvToAllOrder;
+    @Bind(R.id.tv_to_address)
+    TextView tvToAddress;
 
 
     User user;
@@ -74,6 +77,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         ibUserAvator.setOnClickListener(this);
         tvModifyUser.setOnClickListener(this);
         tvToAllOrder.setOnClickListener(this);
+        tvToAddress.setOnClickListener(this);
         user = new Gson().fromJson(CacheUtils.getString(mContext, "user"), User.class);
         if (user == null) {
             llNotLogin.setVisibility(View.VISIBLE);
@@ -157,7 +161,10 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
                 Intent intent3 = new Intent(mContext, AllOrderActivity.class);
                 startActivity(intent3);
                 break;
-
+            case R.id.tv_to_address:
+                Intent intent4 = new Intent(mContext, AddressMangerActivity.class);
+                startActivity(intent4);
+                break;
         }
     }
 
@@ -167,7 +174,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: resultcode" + resultCode);
         if (resultCode == 0) {
-            if (requestCode == 1) {
+            if (requestCode == 1&&data!=null) {
                 llNotLogin.setVisibility(View.GONE);
                 User user = (User) data.getSerializableExtra("user");
                 Log.d(TAG, "onActivityResult: " + user);

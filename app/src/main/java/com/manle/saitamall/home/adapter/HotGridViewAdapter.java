@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.manle.saitamall.R;
+import com.manle.saitamall.bean.Product;
 import com.manle.saitamall.home.bean.ResultBean;
 import com.manle.saitamall.utils.Constants;
 import com.bumptech.glide.Glide;
@@ -22,9 +23,9 @@ import butterknife.ButterKnife;
  */
 public class HotGridViewAdapter extends BaseAdapter {
     private Context mContext;
-    private List<ResultBean.HotInfoBean> data;
+    private List<Product> data;
 
-    public HotGridViewAdapter(Context mContext, List<ResultBean.HotInfoBean> data) {
+    public HotGridViewAdapter(Context mContext, List<Product> data) {
         this.mContext = mContext;
         this.data = data;
     }
@@ -55,12 +56,12 @@ public class HotGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ResultBean.HotInfoBean hotInfoBean = data.get(position);
+        Product hotInfoBean = data.get(position);
         Glide.with(mContext)
-                .load(Constants.BASE_URl_IMAGE +hotInfoBean.getFigure())
+                .load(Constants.BASE_SERVER_IMAGE +hotInfoBean.getFigure())
                 .into(holder.ivHot);
-        holder.tvName.setText(hotInfoBean.getName());
-        holder.tvPrice.setText("￥" + hotInfoBean.getCover_price());
+        holder.tvName.setText(hotInfoBean.getProductName());
+        holder.tvPrice.setText("RMB " + hotInfoBean.getCoverPrice());
         return convertView;
     }
 

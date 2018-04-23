@@ -2,28 +2,39 @@ package com.manle.saitamall.utils;
 
 public class Constants {
     //家里wifi
- //  public static final String BASE = "http://192.168.1.106";
+    //  public static final String BASE = "http://192.168.1.106";
     //公司wifi
-   public static final String BASE = "http://192.168.137.1";
+    public static final String BASE = "http://192.168.137.1";
 
-   public static final String BASE_MANLE = "http://192.168.137.1:8080";
+    public static final String BASE_MANLE = "http://192.168.137.1:8080";
 
-   public static final String CLIENT_USER = BASE_MANLE + "/api/client-users";
+    public static final String CLIENT_USER = BASE_MANLE + "/api/client-users";
 
-   public static final String USER_FIGURE = CLIENT_USER + "/upload";
+    public static final String USER_FIGURE = CLIENT_USER + "/upload";
 
-   // 请求图片基本URL
-   public static final String BASE_SERVER_IMAGE = BASE_MANLE + "/templates/images/";
-   public static final String AVATAR_IMAGE = BASE_SERVER_IMAGE + "avatar/";
+    // 请求图片基本URL
+    public static final String BASE_SERVER_IMAGE = BASE_MANLE + "/templates/images/";
+    public static final String AVATAR_IMAGE = BASE_SERVER_IMAGE + "avatar/";
 
 
-   public static final String ORDER_MASTER = BASE_MANLE+"/api/order-masters";
+    public static final String ORDER_MASTER = BASE_MANLE + "/api/order-masters";
 
-   public static final String ORDER_MASTER_USER = ORDER_MASTER + "/user";
+    public static final String ORDER_MASTER_USER = ORDER_MASTER + "/user";
 
-   public static final String ORDER_ITEM = BASE_MANLE+"/api/order-items";
+    public static final String ORDER_ITEM = BASE_MANLE + "/api/order-items";
 
-   public static final String ORDER_ITEM_MASTER = ORDER_ITEM + "/master";
+    public static final String ORDER_ITEM_MASTER = ORDER_ITEM + "/master";
+
+    //发文
+    public static final String ARTICAL = BASE_MANLE+"/api/articals";
+    public static final String ARTICAL_FIGURE = ARTICAL+"/upload";
+    public static final String ARTICAL_IMAGE = BASE_SERVER_IMAGE+"artical/";
+    //地址
+    public static final String ADDRESS = BASE_MANLE + "/api/addresses";
+
+
+    public static final String PRODUCT = BASE_MANLE + "/api/products";
+    public static final String HOME = PRODUCT + "/home";
 
 /*
    public static final String WAIT_TO_SEND = "WAIT_TO_SEND";
@@ -34,11 +45,7 @@ public class Constants {
 */
 
 
-
-
-
-
- // 请求Json数据基本URL
+    // 请求Json数据基本URL
     public static final String BASE_URL_JSON = BASE + "/atguigu/json/";
 
     // 请求图片基本URL
@@ -69,7 +76,7 @@ public class Constants {
     public static Boolean isBackHome = false;
 
     //客服数据
- //   public static final String CALL_CENTER = "http://www6.53kf.com/webCompany.php?arg=10007377&style=1&kflist=off&kf=info@atguigu.com,video@atguigu.com,public@atguigu.com,3069368606@qq.com,215648937@qq.com,sudan@atguigu.com,sszhang@atguigu.com&zdkf_type=1&language=zh-cn&charset=gbk&referer=http%3A%2F%2Fwww.atguigu.com%2Fcontant.shtml&keyword=&tfrom=1&tpl=crystal_blue&timeStamp=1479001706368&ucust_id=";
+    //   public static final String CALL_CENTER = "http://www6.53kf.com/webCompany.php?arg=10007377&style=1&kflist=off&kf=info@atguigu.com,video@atguigu.com,public@atguigu.com,3069368606@qq.com,215648937@qq.com,sudan@atguigu.com,sszhang@atguigu.com&zdkf_type=1&language=zh-cn&charset=gbk&referer=http%3A%2F%2Fwww.atguigu.com%2Fcontant.shtml&keyword=&tfrom=1&tpl=crystal_blue&timeStamp=1479001706368&ucust_id=";
     public static final String CALL_CENTER = "https://chat.kuaishangkf.com/#/?script=xx4yrZrj37tm5HrfH67KJNhH";
 }
 

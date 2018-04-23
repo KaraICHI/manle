@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.manle.saitamall.R;
+import com.manle.saitamall.bean.Product;
 import com.manle.saitamall.home.bean.ResultBean;
 import com.manle.saitamall.utils.Constants;
 import com.bumptech.glide.Glide;
@@ -24,13 +25,12 @@ import java.util.List;
 public class SeckillRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
-    private ResultBean.SeckillInfoBean data;
-    private final List<ResultBean.SeckillInfoBean.ListBean> list;
 
-    public SeckillRecyclerViewAdapter(Context mContext, ResultBean.SeckillInfoBean data) {
+    private final List<Product> list;
+
+    public SeckillRecyclerViewAdapter(Context mContext, List<Product> data) {
         this.mContext = mContext;
-        this.data = data;
-        list = data.getList();
+        list = data;
     }
 
     @Override
@@ -64,19 +64,15 @@ public class SeckillRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         }
 
         public void setData(final int position) {
-            ResultBean.SeckillInfoBean.ListBean listBean = list.get(position);
-            tvCoverPrice.setText("￥" + listBean.getCover_price());
-            tvOriginPrice.setText("￥" + listBean.getOrigin_price());
+            Product listBean = list.get(position);
+            tvCoverPrice.setText("RMB " + listBean.getCoverPrice());
+            tvOriginPrice.setText("优惠" + listBean.getOriginPrice());
             Glide.with(mContext)
-                    .load(Constants.BASE_URl_IMAGE +listBean.getFigure())
+                    .load(Constants.BASE_SERVER_IMAGE +listBean.getFigure())
                     .into(ivFigure);
-            ll_root.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  //  Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
-                    if (onSeckillRecyclerView != null) {
-                        onSeckillRecyclerView.onClick(position);
-                    }
+            ll_root.setOnClickListener(v -> {
+                if (onSeckillRecyclerView != null) {
+                    onSeckillRecyclerView.onClick(position);
                 }
             });
         }

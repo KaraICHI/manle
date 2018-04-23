@@ -126,12 +126,6 @@
             android:text="登录"
             android:textColor="#fff" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="点击登录，表示同意《manle用户协议》" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

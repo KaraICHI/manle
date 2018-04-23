@@ -15,11 +15,15 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.manle.saitamall.R;
 import com.manle.saitamall.base.BaseFragment;
+import com.manle.saitamall.bean.Category;
+import com.manle.saitamall.bean.Product;
 import com.manle.saitamall.home.adapter.HomeRecycleAdapter;
-import com.manle.saitamall.home.bean.ResultBean;
+import com.manle.saitamall.home.bean.HomeBean;
 import com.manle.saitamall.user.activity.MessageCenterActivity;
+import com.manle.saitamall.utils.CacheUtils;
 import com.manle.saitamall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -31,12 +35,13 @@ import okhttp3.Request;
 // 首页
 public class HomeFragment extends BaseFragment {
 
-    private ResultBean resultBean;
+    private HomeBean homeBean;
     private RecyclerView rvHome;
     private ImageView ib_top;
     private HomeRecycleAdapter adapter;
     private TextView tv_search_home;
     private ImageButton tv_message_home;
+
 
     @Override
     public View initView() {
@@ -58,7 +63,7 @@ public class HomeFragment extends BaseFragment {
     public void getDataFromNet() {
         OkHttpUtils
                 .get()
-                .url(Constants.HOME_URL)
+                .url(Constants.HOME)
                 .id(100)
                 .build()
                 .execute(new MyStringCallback());
@@ -76,46 +81,23 @@ public class HomeFragment extends BaseFragment {
 
         @Override
         public void onError(okhttp3.Call call, Exception e, int id) {
-
+            Toast.makeText(mContext,e.getMessage(),Toast.LENGTH_SHORT).show();
+            String home = CacheUtils.getString(mContext,"homeInfo");
+            processData(home);
         }
 
-        public void onError(Call call, Exception e, int id) {
-            Log.e("TAG", "联网失败" + e.getMessage());
-        }
 
         @Override
         public void onResponse(String response, int id) {
 
-            switch (id) {
-                case 100:
-                    if (response != null) {
-                        processData(response);
-                        adapter = new HomeRecycleAdapter(mContext, resultBean);
-                        rvHome.setAdapter(adapter);
 
-                        GridLayoutManager manager = new GridLayoutManager(getActivity(), 1);
+            if (response != null) {
+                processData(response);
+                CacheUtils.putString(mContext,"homeInfo",response);
 
-                        //设置滑动到哪个位置了的监听
-                        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                            @Override
-                            public int getSpanSize(int position) {
-                                if (position <= 3) {
-                                    ib_top.setVisibility(View.GONE);
-                                } else {
-                                    ib_top.setVisibility(View.VISIBLE);
-                                }
-                                return 1;
-                            }
-                        });
-                        //设置网格布局
-                        rvHome.setLayoutManager(manager);
-
-                        initListener();
-                    }
-                    break;
-                case 101:
-                    break;
             }
+
+
         }
     }
 
@@ -150,49 +132,30 @@ public class HomeFragment extends BaseFragment {
     private void processData(String json) {
 
         if (!TextUtils.isEmpty(json)) {
-            JSONObject jsonObject = JSON.parseObject(json);
-            //得到状态码
-            String code = jsonObject.getString("code");
-            String msg = jsonObject.getString("msg");
-            String result = jsonObject.getString("result");
 
-            //得到resultBean的数据
-            JSONObject ResultBean = JSON.parseObject(result, ResultBean.class);
-            String banner_info = ResultBean.getString("banner_info");
-            String act_info = ResultBean.getString("act_info");
-            String channel_info = ResultBean.getString("channel_info");
-            String hot_info = ResultBean.getString("hot_info");
-            String recommend_info = ResultBean.getString("recommend_info");
-            String seckill_info = ResultBean.getString("seckill_info");
+            homeBean = new Gson().fromJson(json, HomeBean.class);
+            adapter = new HomeRecycleAdapter(mContext, homeBean);
+            rvHome.setAdapter(adapter);
 
-            resultBean = new ResultBean();
+            GridLayoutManager manager = new GridLayoutManager(getActivity(), 1);
 
-            //设置BannerInfoBean数据
-            List<ResultBean.BannerInfoBean> bannerInfoBeans = JSON.parseArray(banner_info, ResultBean.BannerInfoBean.class);
-            resultBean.setBanner_info(bannerInfoBeans);
-            String value = jsonObject.getString("value");
-            com.manle.saitamall.home.bean.ResultBean.BannerInfoBean.ValueBean valueBean = JSON.parseObject(value, com.manle.saitamall.home.bean.ResultBean.BannerInfoBean.ValueBean.class);
+            //设置滑动到哪个位置了的监听
+            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (position <= 3) {
+                        ib_top.setVisibility(View.GONE);
+                    } else {
+                        ib_top.setVisibility(View.VISIBLE);
+                    }
+                    return 1;
+                }
+            });
+            //设置网格布局
+            rvHome.setLayoutManager(manager);
 
+            initListener();
 
-            //设置actInfoBeans数据
-            List<ResultBean.ActInfoBean> actInfoBeans = JSON.parseArray(act_info, ResultBean.ActInfoBean.class);
-            resultBean.setAct_info(actInfoBeans);
-
-            //设置channelInfoBeans的数据
-            List<ResultBean.ChannelInfoBean> channelInfoBeans = JSON.parseArray(channel_info, ResultBean.ChannelInfoBean.class);
-            resultBean.setChannel_info(channelInfoBeans);
-
-            //设置hotInfoBeans的数据
-            List<ResultBean.HotInfoBean> hotInfoBeans = JSON.parseArray(hot_info, ResultBean.HotInfoBean.class);
-            resultBean.setHot_info(hotInfoBeans);
-
-            //设置recommendInfoBeans的数据
-            List<ResultBean.RecommendInfoBean> recommendInfoBeans = JSON.parseArray(recommend_info, ResultBean.RecommendInfoBean.class);
-            resultBean.setRecommend_info(recommendInfoBeans);
-
-            //设置seckillInfoBean的数据
-            ResultBean.SeckillInfoBean seckillInfoBean = JSON.parseObject(seckill_info, ResultBean.SeckillInfoBean.class);
-            resultBean.setSeckill_info(seckillInfoBean);
         }
     }
 }

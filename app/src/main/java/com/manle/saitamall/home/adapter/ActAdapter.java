@@ -44,7 +44,7 @@ public class ActAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_act, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.theme_img);
         Glide.with(mContext)
-                .load(Constants.BASE_URl_IMAGE +list.get(position).getIcon_url())
+                .load(Constants.BASE_SERVER_IMAGE +list.get(position).getIcon_url())
                 .into(imageView);
         container.addView(view);
         return view;

@@ -171,11 +171,11 @@ public class ShopCartAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             cbGov.setChecked(goodsBean.isChildSelected());
 
             Glide.with(mContext)
-                    .load(Constants.BASE_URl_IMAGE + goodsBean.getFigure())
+                    .load(Constants.BASE_SERVER_IMAGE+ goodsBean.getFigure())
                     .into(ivGov);
 
             tvDescGov.setText(goodsBean.getName());
-            tvPriceGov.setText("￥" + goodsBean.getCover_price());
+            tvPriceGov.setText("RMB " + goodsBean.getCover_price());
 
             //设置数字加减回调
             numberAddSubView.setValue(goodsBean.getNumber());
