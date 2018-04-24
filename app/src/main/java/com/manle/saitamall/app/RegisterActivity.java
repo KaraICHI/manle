@@ -2,6 +2,7 @@ package com.manle.saitamall.app;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,9 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.lljjcoder.style.citylist.Toast.ToastUtils;
 import com.manle.saitamall.R;
 import com.manle.saitamall.bean.User;
+import com.manle.saitamall.utils.CacheUtils;
 import com.manle.saitamall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -19,6 +24,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import okhttp3.MediaType;
 import okhttp3.Request;
 
 import static android.content.ContentValues.TAG;
@@ -59,7 +65,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     }
 
     private void isRepeat() {
-        if (!etRegisterPwdRe.getText().equals(etRegisterPwd.getText())){
+        if (!etRegisterPwdRe.getText().toString().equals(etRegisterPwd.getText().toString())){
             tvAlertError.setVisibility(View.VISIBLE);
             tvAlertError.setText("与输入密码不一致");
         }else {
@@ -83,8 +89,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
     private void register() {
        User user = new User(etRegisterName.getText().toString(),etRegisterPhone.getText().toString(),etRegisterPwd.getText().toString(),null,0f);
-
-       OkHttpUtils.post().tag(this).url(Constants.CLIENT_USER).addParams("userName",user.getUserName()).addParams("phone",user.getPhone()).addParams("password",user.getPassword()).build().execute(new StringCallback() {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        String userJson = new Gson().toJson(user);
+       OkHttpUtils.postString().tag(this).url(Constants.CLIENT_USER).mediaType(JSON).content(userJson).build().execute(new StringCallback() {
            @Override
            public void onBefore(Request request, int id) {
                super.onBefore(request, id);
@@ -102,11 +109,26 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
            @Override
            public void onError(Call call, Exception e, int id) {
                Log.d(TAG, "onError: =============="+e.getMessage());
+               ToastUtils.showShortToast(RegisterActivity.this,e.getMessage());
            }
 
            @Override
            public void onResponse(String response, int id) {
                Log.d(TAG, "onResponse:===============register "+response);
+               if (response != null) {
+                   Gson gson = new Gson();
+                   User user = gson.fromJson(response, User.class);
+                   if (user!=null){
+                       ToastUtils.showShortToast(RegisterActivity.this,"注册成功");
+                       finish();
+                   }else {
+                       ToastUtils.showShortToast(RegisterActivity.this,"注册失败");
+                   }
+
+               } else {
+                   ToastUtils.showShortToast(RegisterActivity.this,"注册失败");
+               }
+
            }
        });
 

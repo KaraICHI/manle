@@ -3,12 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <ListView
-        android:id="@+id/lv_new_post"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#eeee"
-        android:divider="#00000000"
-        android:dividerHeight="18dp"></ListView>
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_new_post"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eeee"
+            android:divider="#00000000"
+            android:dividerHeight="18dp"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </LinearLayout>

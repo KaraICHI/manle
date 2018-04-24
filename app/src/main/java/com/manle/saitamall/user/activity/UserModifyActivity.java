@@ -214,7 +214,7 @@ public class UserModifyActivity extends CameraBaseActivity implements View.OnCli
                 Log.e(TAG, "onResponse：response=" + response + "===" + id);
                 try {
                     processData(response);
-                    if (user != null) {
+                    if (user.getFigure().equals(fileName)) {
                         Bitmap bitmap = createCircleImage(BitmapFactory.decodeFile(photoOutputUri.getPath()));
                         ivUserAvatar.setBackground(new BitmapDrawable(getResources(), bitmap));
                         //    CacheUtils.putString(mContext,"user",response);
@@ -243,7 +243,8 @@ public class UserModifyActivity extends CameraBaseActivity implements View.OnCli
     private void processData(String response) {
         if (response != null && !"".equals(response)) {
             Gson gson = new Gson();
-            user = gson.fromJson(response, User.class);
+            User user1 = gson.fromJson(response, User.class);
+            user.setFigure(user1.getFigure());
             Log.e(TAG, "processData: ========" + user);
         } else {
             Toast.makeText(mContext, "修改失败，请重试！", Toast.LENGTH_SHORT);

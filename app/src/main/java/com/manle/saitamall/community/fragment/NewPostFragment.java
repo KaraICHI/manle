@@ -1,19 +1,27 @@
 package com.manle.saitamall.community.fragment;
 
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.manle.saitamall.R;
-import com.manle.saitamall.community.adapter.NewPostListViewAdapter;
-import com.manle.saitamall.base.BaseFragment;
-import com.manle.saitamall.community.bean.NewPostBean;
-import com.manle.saitamall.utils.Constants;
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.manle.saitamall.R;
+import com.manle.saitamall.base.BaseFragment;
+import com.manle.saitamall.bean.User;
+import com.manle.saitamall.community.adapter.NewPostListViewAdapter;
+import com.manle.saitamall.community.bean.ArticalVO;
+import com.manle.saitamall.utils.CacheUtils;
+import com.manle.saitamall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -24,12 +32,17 @@ import okhttp3.Request;
  */
 public class NewPostFragment extends BaseFragment {
     private ListView lv_new_post;
-    private List<NewPostBean.ResultBean> result;
+    private List<ArticalVO> result;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    NewPostListViewAdapter adapter;
 
     @Override
     public View initView() {
         View view = View.inflate(mContext, R.layout.fragment_new_post, null);
         lv_new_post = (ListView) view.findViewById(R.id.lv_new_post);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+
+        initPullRefresh();
         return view;
     }
 
@@ -41,7 +54,7 @@ public class NewPostFragment extends BaseFragment {
     public void getDataFromNet() {
         OkHttpUtils
                 .get()
-                .url(Constants.NEW_POST_URL)
+                .url(Constants.ARTICAL + "/new")
                 .id(100)
                 .build()
                 .execute(new MyStringCallback());
@@ -70,7 +83,7 @@ public class NewPostFragment extends BaseFragment {
                 case 100:
                     if (response != null) {
                         processData(response);
-                        NewPostListViewAdapter adapter = new NewPostListViewAdapter(mContext, result);
+                        adapter = new NewPostListViewAdapter(mContext, result);
                         lv_new_post.setAdapter(adapter);
                     }
                     break;
@@ -84,7 +97,24 @@ public class NewPostFragment extends BaseFragment {
 
     private void processData(String json) {
         Gson gson = new Gson();
-        NewPostBean newPostBean = gson.fromJson(json, NewPostBean.class);
-        result = newPostBean.getResult();
+        result = gson.fromJson(json, new TypeToken<List<ArticalVO>>() {
+        }.getType());
+
     }
+
+    private void initPullRefresh() {
+        mSwipeRefreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(() -> {
+            List<ArticalVO> headDatas;
+            List<ArticalVO> articalVOS = new ArrayList<>();
+            articalVOS.addAll(result);
+            getDataFromNet();
+            headDatas = Stream.of(result).filter(r -> !articalVOS.contains(r)).collect(Collectors.toList());
+            adapter.AddHeaderItem(headDatas);
+
+            //刷新完成
+            mSwipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(mContext, "更新了 " + headDatas.size() + " 条目数据", Toast.LENGTH_SHORT).show();
+        }, 3000));
+    }
+
 }

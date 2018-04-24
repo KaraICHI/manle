@@ -119,12 +119,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 if (response != null) {
                     Gson gson = new Gson();
                     User user = gson.fromJson(response, User.class);
-                    CacheUtils.putString(LoginActivity.this,"user",response);
-                    Toast.makeText(LoginActivity.this, "登陆成功" + user.getUserName(), Toast.LENGTH_SHORT).show();
-                    Intent intent = getIntent();
-                    intent.putExtra("user",user);
-                    setResult(0,intent);
-                    finish();
+                    if (user!=null){
+                        CacheUtils.putString(LoginActivity.this,"user",response);
+                        Toast.makeText(LoginActivity.this, "登陆成功" + user.getUserName(), Toast.LENGTH_SHORT).show();
+                        Intent intent = getIntent();
+                        intent.putExtra("user",user);
+                        setResult(0,intent);
+                        finish();
+                    }else {
+                        Toast.makeText(LoginActivity.this, "用户名或密码输入错误", Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     Toast.makeText(LoginActivity.this, "用户名或密码输入错误", Toast.LENGTH_SHORT).show();
                 }

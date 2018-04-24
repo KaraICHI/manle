@@ -9,9 +9,8 @@ import java.util.Objects;
 /**
  * A DTO for the ArticalComment entity.
  */
-public class ArticalComment extends JSONObject implements Serializable {
+public class ArticalComment  {
 
-    private static final long serialVersionUID = 2004950540058378934L;
     private Long id;
 
     private String content;
@@ -19,6 +18,12 @@ public class ArticalComment extends JSONObject implements Serializable {
     private Long articalId;
 
     private Long clientUserId;
+
+    public ArticalComment(String content, Long articalId, Long clientUserId) {
+        this.content = content;
+        this.articalId = articalId;
+        this.clientUserId = clientUserId;
+    }
 
     public Long getId() {
         return id;

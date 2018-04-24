@@ -25,16 +25,19 @@ public class Constants {
 
     public static final String ORDER_ITEM_MASTER = ORDER_ITEM + "/master";
 
-    //发文
+    //社区
     public static final String ARTICAL = BASE_MANLE+"/api/articals";
     public static final String ARTICAL_FIGURE = ARTICAL+"/upload";
-    public static final String ARTICAL_IMAGE = BASE_SERVER_IMAGE+"artical/";
+    public static final String ARTICAL_IMAGE = BASE_SERVER_IMAGE+"article/";
+
     //地址
     public static final String ADDRESS = BASE_MANLE + "/api/addresses";
 
 
     public static final String PRODUCT = BASE_MANLE + "/api/products";
     public static final String HOME = PRODUCT + "/home";
+
+
 
 /*
    public static final String WAIT_TO_SEND = "WAIT_TO_SEND";

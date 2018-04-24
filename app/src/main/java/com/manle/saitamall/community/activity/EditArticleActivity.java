@@ -31,6 +31,9 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.FormatUtils;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -124,8 +127,10 @@ public class EditArticleActivity extends CameraBaseActivity implements View.OnCl
             artical.setTitle(title);
             artical.setContent(content);
             artical.setFavorite(0l);
-            LocalDate localDate = LocalDate.now();
-            artical.setCreatDate(   localDate.toString("yyyy-MM-dd"));
+            Date createDate = new Date(System.currentTimeMillis());
+            SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            fm.setTimeZone(TimeZone.getTimeZone("UTC"));
+            artical.setCreatDate(fm.format(createDate));
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             String articalJson = new Gson().toJson(artical);
             OkHttpUtils.postString().mediaType(JSON).content(articalJson).url(Constants.ARTICAL).build().execute(new StringCallback() {

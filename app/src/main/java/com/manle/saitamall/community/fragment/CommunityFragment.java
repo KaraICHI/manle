@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.gson.Gson;
+import com.lljjcoder.style.citylist.Toast.ToastUtils;
 import com.manle.saitamall.R;
 import com.manle.saitamall.base.BaseFragment;
 import com.manle.saitamall.bean.User;
@@ -30,17 +31,16 @@ public class CommunityFragment extends BaseFragment {
         tablayout = (TabLayout) view.findViewById(R.id.tablayout);
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         ib_edit = (ImageButton) view.findViewById(R.id.ib_edit);
-        ib_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                user = new Gson().fromJson(CacheUtils.getString(mContext,"user"),User.class);
-                if (user!=null){
-                    Intent intent = new Intent(getContext(), EditArticleActivity.class);
-                    intent.putExtra("user",user);
-                    startActivity(intent);
-                }
-
+        ib_edit.setOnClickListener(v -> {
+            user = new Gson().fromJson(CacheUtils.getString(mContext,"user"),User.class);
+            if (user!=null){
+                Intent intent = new Intent(getContext(), EditArticleActivity.class);
+                intent.putExtra("user",user);
+                startActivity(intent);
+            }else {
+                ToastUtils.showShortToast(mContext,"请登录账号");
             }
+
         });
 
 

@@ -151,8 +151,6 @@ public class ShoppingCartFragment extends BaseFragment implements View.OnClickLi
         });
 
         tvEmptyCartTobuy.setOnClickListener(v -> {
-            Intent intent = new Intent(mContext, MainActivity.class);
-            startActivity(intent);
             Constants.isBackHome = true;
         });
     }

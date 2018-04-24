@@ -23,6 +23,7 @@ import com.manle.saitamall.shoppingcart.fragment.ShoppingCartFragment;
 import com.manle.saitamall.type.fragment.ThemeFragment;
 import com.manle.saitamall.user.fragment.UserFragment;
 import com.manle.saitamall.utils.CacheUtils;
+import com.manle.saitamall.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -100,37 +101,34 @@ public class MainActivity extends FragmentActivity {
 
     private void initListener() {
 
-        rgMain.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
+        rgMain.setOnCheckedChangeListener((group, checkedId) -> {
 
-                switch (checkedId) {
-                    case R.id.rb_home:
-                        position = 0;
-                        break;
+            switch (checkedId) {
+                case R.id.rb_home:
+                    position = 0;
+                    break;
 
-                    case R.id.rb_type:
-                        position = 1;
-                        break;
+                case R.id.rb_type:
+                    position = 1;
+                    break;
 
-                    case R.id.rb_community:
-                        position = 2;
-                        break;
+                case R.id.rb_community:
+                    position = 2;
+                    break;
 
-                    case R.id.rb_cart:
-                        position = 3;
-                        break;
+                case R.id.rb_cart:
+                    position = 3;
+                    break;
 
-                    case R.id.rb_user:
-                        position = 4;
-                        break;
-                }
-
-                BaseFragment baseFragment = getFragment(position);
-
-                    switchFragment(mContext, baseFragment);
-
+                case R.id.rb_user:
+                    position = 4;
+                    break;
             }
+
+            BaseFragment baseFragment = getFragment(position);
+
+                switchFragment(mContext, baseFragment);
+
         });
 
         rgMain.check(R.id.rb_home);
@@ -177,6 +175,7 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
+
 
 
 
